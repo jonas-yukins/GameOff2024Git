@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class PlayerHealth : MonoBehaviour
     public float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthBar;
+    public TMP_Text healthText;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        UpdateHealthText();
     }
 
     // Update is called once per frame
@@ -24,12 +27,16 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
+        UpdateHealthText();
+
+        // test:
         if (Input.GetKeyDown(KeyCode.A)) {
             TakeDamage(Random.Range(5, 10));
         }
         if (Input.GetKeyDown(KeyCode.S)) {
             RestoreHealth(Random.Range(5, 10));
         }
+
     }
 
     public void UpdateHealthUI() {
@@ -68,5 +75,11 @@ public class PlayerHealth : MonoBehaviour
     public void RestoreHealth(float healAmount) {
         health += healAmount;
         lerpTimer = 0f;
+    }
+
+    public void UpdateHealthText() {
+        if (healthText != null) {
+            healthText.text = health.ToString() + "/100";
+        }
     }
 }
