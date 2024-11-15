@@ -5,10 +5,11 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     public BaseState activeState;
-    // property for patrol state
+    public PatrolState patrolState;
 
     public void Initialize() {
-        // setup default state
+        patrolState = new PatrolState();
+        ChangeState(patrolState);
     }
 
     // Start is called before the first frame update
@@ -40,7 +41,7 @@ public class StateMachine : MonoBehaviour
         if (activeState != null) {
             // setup new state
             activeState.stateMachine = this;
-            // assign state enemy clas
+            activeState.enemy = GetComponent<Enemy>();
             activeState.Enter();
         }
     }

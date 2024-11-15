@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] // for debugging purposes
     private string currentState;
+    public AIPath path;
     // Start is called before the first frame update
     void Start()
     {
