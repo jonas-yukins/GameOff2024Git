@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour
     private StateMachine stateMachine;
     private NavMeshAgent agent;
     public NavMeshAgent Agent { get => agent; }
+
+    // animations
+    public Animator animator;
+    public bool isMoving;
     
     [SerializeField] // for debugging purposes
     private string currentState;
@@ -30,6 +34,9 @@ public class Enemy : MonoBehaviour
     {
         CanSeePlayer();
         currentState = stateMachine.activeState.ToString();
+
+        // Update the Animator's isMoving parameter based on AI state or movement
+        animator.SetBool("isMoving", isMoving);
     }
 
     public bool CanSeePlayer()

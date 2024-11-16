@@ -25,7 +25,10 @@ public class PatrolState : BaseState
         // implement our patrol logic
         if (enemy.Agent.remainingDistance < 0.2f) {
             waitTimer += Time.deltaTime;
+            // Update the Animator's isMoving parameter based on AI state or movement
+            enemy.isMoving = false;
             if (waitTimer > 3) {
+                enemy.isMoving = true;
                 if (waypointIndex < enemy.path.waypoints.Count - 1) {
                     waypointIndex++;
                 } else {
