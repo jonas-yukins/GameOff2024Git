@@ -6,20 +6,32 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     private StateMachine stateMachine;
+    private GameObject player;
+
     private NavMeshAgent agent;
     public NavMeshAgent Agent { get => agent; }
+
+    public GameObject Player { get => player; }
 
     // animations
     public Animator animator;
     public bool isMoving;
     
-    [SerializeField] // for debugging purposes
-    private string currentState;
+    
     public AIPath path;
-    private GameObject player;
+    [Header("Sight Values")]
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float eyeHeight;
+
+    [Header("weapon Values")]
+    public Transform gunBarrel;
+    [Range(0.1f, 10)]
+    public float fireRate;
+
+    [SerializeField] // for debugging purposes
+    private string currentState;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -40,9 +40,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -2486637764561465324}
     m_Position: {x: 350, y: 230, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1202262523632103336}
-    m_Position: {x: 530, y: 180, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -74,7 +71,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ee2f7071f32fc460aa4e67b08aa2142b, type: 2}
+  m_Motion: {fileID: 7400000, guid: f49e1e76e8bd94b47bbd8380962a05e1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -129,34 +126,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ee2f7071f32fc460aa4e67b08aa2142b, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &1202262523632103336
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: RifleWalk 0
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 07941a728b0f8400cbadb4c5cfecd9a0,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: 0542f5b6c8c534353bc864e134f6328a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
