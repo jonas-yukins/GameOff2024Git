@@ -12,6 +12,11 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Hit Player");
             hitTransform.GetComponent<PlayerHealth>().TakeDamage(10);
+        } else if (hitTransform.CompareTag("Enemy"))
+        {
+            Debug.Log("Hit Enemy");
+            // decrease AI health
+            //hitTransform.GetComponent<PlayerHealth>().TakeDamage(10);
         }
         Destroy(gameObject);
     }

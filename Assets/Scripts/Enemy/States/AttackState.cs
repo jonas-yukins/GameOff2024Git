@@ -56,7 +56,7 @@ public class AttackState : BaseState
     }
 
     public void Shoot()
-{
+    {
     // store reference to gun barrel
     Transform gunbarrel = enemy.gunBarrel;
 
@@ -68,6 +68,9 @@ public class AttackState : BaseState
 
     // add small random variation for bullet spread (adjust the range as needed)
     Vector3 randomSpread = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * shootDirection;
+
+    // Adjust the bullet's rotation to match the shoot direction
+    bullet.transform.rotation = Quaternion.FromToRotation(bullet.transform.up, shootDirection);
 
     // set bullet velocity (using Rigidbody velocity)
     Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
