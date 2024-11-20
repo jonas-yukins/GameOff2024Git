@@ -1153,6 +1153,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public WeaponActions @Weapon => new WeaponActions(this);
+
+    public object Player { get; internal set; }
+
     public interface IOnFootActions
     {
         void OnMovement(InputAction.CallbackContext context);
