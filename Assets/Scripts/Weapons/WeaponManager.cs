@@ -52,4 +52,12 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.StopFire();  // Call the weapon's StopFire method
         }
     }
+
+    public void Reload()
+    {
+        if (currentWeapon != null)
+        {
+            currentWeapon.Reload(); // Call the weapon's Reload method
+        }
+    }
 }

@@ -9,10 +9,15 @@ public abstract class Weapon : MonoBehaviour
     public Transform gunbarrel;             // Where bullets are fired from
     public float bulletVelocity = 30f;      // Bullet velocity
     public float bulletLifeTime = 3f;       // How long the bullet exists
-    public int ammoCount = 30;              // Ammo count for the gun (this will be specific to each weapon)
     public float fireRate = 0.1f;           // Rate of fire for the gun
     private bool isFiring = false;           // Is the weapon currently firing?
     private float nextFireTime = 0f;        // Time when we can fire next (used for fire rate control)
+    public int maxAmmo = 30;    // Max ammo capacity
+    public int ammoCount;  // Current ammo count
+
+    public float reloadTime = 2f;  // Time it takes to reload
+    private bool isReloading = false;  // Flag to prevent multiple reloads at once
+
 
     // Called when the player starts firing the weapon
     public virtual void StartFire()
@@ -41,7 +46,28 @@ public abstract class Weapon : MonoBehaviour
     // Reloads the weapon
     public virtual void Reload()
     {
-        Debug.Log("Reloading weapon...");
-        ammoCount = 30;  // Reset ammo count to full
+        if (isReloading)
+            return;  // Don't reload if already reloading
+
+        isReloading = true;
+        while (isReloading) {
+            StopFire(); // can't shoot while reloading
+        }
+        Debug.Log("Reloading...");
+
+        // Start reloading process
+        StartCoroutine(ReloadCoroutine());
+    }
+
+    private IEnumerator ReloadCoroutine()
+    {
+        // Simulate reload time (e.g., playing reload animation)
+        yield return new WaitForSeconds(reloadTime);
+
+        // Reload the weapon
+        ammoCount = maxAmmo;
+        isReloading = false;
+
+        Debug.Log("Reloaded! Ammo: " + ammoCount);
     }
 }
