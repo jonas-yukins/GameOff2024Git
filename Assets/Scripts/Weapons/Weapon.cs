@@ -12,7 +12,6 @@ public abstract class Weapon : MonoBehaviour
     public int ammoCount = 30;              // Ammo count for the gun (this will be specific to each weapon)
     public float fireRate = 0.1f;           // Rate of fire for the gun
     private bool isFiring = false;           // Is the weapon currently firing?
-
     private float nextFireTime = 0f;        // Time when we can fire next (used for fire rate control)
 
     // Called when the player starts firing the weapon
