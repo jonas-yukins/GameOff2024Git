@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6800858736335426534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ref_left_hand_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3770663255498581881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ref_right_hand_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5272441180380507697}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,13 +86,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5373498307498699966}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 2, z: 23.18}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.12000058, y: 1.8300002, z: 23.049997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3868960693904101667}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!1 &8788002347926104207
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 836608512325309798}
   - component: {fileID: 4187775954020897942}
   - component: {fileID: 3528817654803701609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5059,6 +5059,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: AssaultRiflePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e6d64f8b74aa9493c8f9ce85d821558f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e6d64f8b74aa9493c8f9ce85d821558f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5127,7 +5137,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1415396412359846111, guid: c1ecfbc6c3a33453780c76c553185270,
     type: 3}
   gunbarrel: {fileID: 5272441180380507697}
-  bulletVelocity: 100
+  bulletVelocity: 30
   bulletLifeTime: 3
-  ammoCount: 30
   fireRate: 0.1
+  maxAmmo: 30
+  ammoCount: 30
+  reloadTime: 2

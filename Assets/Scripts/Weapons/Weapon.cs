@@ -4,70 +4,89 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    // Basic properties for all weapons
-    public GameObject bulletPrefab;         // Bullet prefab to instantiate
-    public Transform gunbarrel;             // Where bullets are fired from
-    public float bulletVelocity = 30f;      // Bullet velocity
-    public float bulletLifeTime = 3f;       // How long the bullet exists
-    public float fireRate = 0.1f;           // Rate of fire for the gun
-    private bool isFiring = false;           // Is the weapon currently firing?
-    private float nextFireTime = 0f;        // Time when we can fire next (used for fire rate control)
-    public int maxAmmo = 30;    // Max ammo capacity
-    public int ammoCount;  // Current ammo count
+    public GameObject bulletPrefab;
+    public Transform gunbarrel;
+    public float bulletVelocity = 30f;
+    public float bulletLifeTime = 3f;
+    public float fireRate = 0.1f;
+    private bool isFiring = false;
+    private float nextFireTime = 0f;
+    public int maxAmmo = 30;
+    public int ammoCount;
+    public float reloadTime = 2f;
+    private bool isReloading = false;
 
-    public float reloadTime = 2f;  // Time it takes to reload
-    private bool isReloading = false;  // Flag to prevent multiple reloads at once
-
-
-    // Called when the player starts firing the weapon
     public virtual void StartFire()
     {
-        Debug.Log("StartFire called");
-        if (Time.time >= nextFireTime) // Check if it's time to fire based on fire rate
+        if (isReloading)
+        {
+            Debug.Log("Cannot fire while reloading.");
+            return;
+        }
+
+        if (Time.time >= nextFireTime)
         {
             Fire();
             nextFireTime = Time.time + fireRate;
         }
     }
 
-    // Called when the player stops firing
     public virtual void StopFire()
     {
-        // Can be used for weapons with continuous fire (like machine guns)
         isFiring = false;
     }
 
-    // The actual firing logic (will be overridden by specific weapon types)
     protected virtual void Fire()
     {
-        Debug.Log("Base weapon fire logic.");
+        if (ammoCount > 0)
+        {
+            // Fire towards the crosshair (center of the screen)
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Ray from the center of the screen
+            RaycastHit hit;
+            Vector3 targetPoint = ray.origin + ray.direction * 100f; // Default to a far distance if no hit occurs
+
+            // If the ray hits something, we use the hit point as the target point
+            if (Physics.Raycast(ray, out hit))
+            {
+                targetPoint = hit.point; 
+            }
+
+            // Instantiate the bullet at the gun barrel
+            GameObject bullet = Instantiate(bulletPrefab, gunbarrel.position, gunbarrel.rotation);
+
+            // Calculate direction from the gun barrel to the target point
+            Vector3 directionToTarget = (targetPoint - gunbarrel.position).normalized;
+
+            // Apply force to the bullet in that direction
+            bullet.GetComponent<Rigidbody>().AddForce(directionToTarget * bulletVelocity, ForceMode.Impulse);
+
+            // Destroy the bullet after a set time
+            Destroy(bullet, bulletLifeTime);
+
+            ammoCount--;  // Decrease ammo
+            Debug.Log($"Ammo left: {ammoCount}");
+        }
+        else
+        {
+            Debug.Log("Out of ammo!");
+        }
     }
 
-    // Reloads the weapon
     public virtual void Reload()
     {
         if (isReloading)
-            return;  // Don't reload if already reloading
+            return;
 
         isReloading = true;
-        while (isReloading) {
-            StopFire(); // can't shoot while reloading
-        }
-        Debug.Log("Reloading...");
-
-        // Start reloading process
+        StopFire();
         StartCoroutine(ReloadCoroutine());
     }
 
     private IEnumerator ReloadCoroutine()
     {
-        // Simulate reload time (e.g., playing reload animation)
         yield return new WaitForSeconds(reloadTime);
-
-        // Reload the weapon
         ammoCount = maxAmmo;
         isReloading = false;
-
-        Debug.Log("Reloaded! Ammo: " + ammoCount);
+        Debug.Log("Reloaded!");
     }
 }

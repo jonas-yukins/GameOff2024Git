@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     public PlayerInput.WeaponActions weaponActions;
     private PlayerMotor motor;
     private PlayerLook look;
-    private WeaponManager weaponManager; // Reference to WeaponManager to control weapons
+    private WeaponManager weaponManager;
 
     void Awake()
     {
@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
-        weaponManager = GetComponent<WeaponManager>();  // Get the WeaponManager component
+        weaponManager = GetComponent<WeaponManager>();
     }
 
     void FixedUpdate()
@@ -27,36 +27,26 @@ public class InputManager : MonoBehaviour
     }
 
     private void LateUpdate()
-    { 
+    {
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable()
     {
+        // Enable actions
         onFoot.Enable();
-        weaponActions.Enable();  // Enable weapon input actions for firing
+        weaponActions.Enable();
 
-        // Bind input actions to methods
+        // Bind actions to methods
         onFoot.Jump.performed += ctx => motor.Jump();
-        weaponActions.Shoot.started += ctx => weaponManager.StartFire();
-        weaponActions.Shoot.canceled += ctx => weaponManager.StopFire();
+        weaponActions.Shoot.started += ctx => weaponManager.HandleFire(true);  // Start firing
+        weaponActions.Shoot.canceled += ctx => weaponManager.HandleFire(false);  // Stop firing
         weaponActions.Reload.performed += ctx => weaponManager.Reload();
     }
 
     private void OnDisable()
     {
         onFoot.Disable();
-        weaponActions.Disable();  // Disable weapon input actions
-    }
-
-    // Handle weapon firing through the input system
-    public void OnShootStarted(InputAction.CallbackContext context)
-    {
-        weaponManager.currentWeapon?.StartFire();
-    }
-
-    public void OnShootCanceled(InputAction.CallbackContext context)
-    {
-        weaponManager.currentWeapon?.StopFire();
+        weaponActions.Disable();
     }
 }
