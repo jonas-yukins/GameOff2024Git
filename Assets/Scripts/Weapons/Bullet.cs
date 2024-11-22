@@ -8,20 +8,38 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision objectHit)
     {
         Transform hitTransform = objectHit.transform;
+
         if (hitTransform.CompareTag("Player"))
         {
             Debug.Log("Hit Player");
             hitTransform.GetComponent<PlayerHealth>().TakeDamage(10);
-        } else if (hitTransform.CompareTag("Enemy"))
+        }
+        
+        if (hitTransform.CompareTag("Enemy"))
         {
             Debug.Log("Hit Enemy");
             // decrease AI health
             //hitTransform.GetComponent<PlayerHealth>().TakeDamage(10);
-        } else if (hitTransform.CompareTag("Map"))
+        }
+        
+        if (hitTransform.CompareTag("Map"))
         {
             Debug.Log("Hit Map");
             CreateBulletImpactEffect(objectHit);
         }
+
+        if (hitTransform.CompareTag("Bottle"))
+        {
+            var explodingBottle = objectHit.collider.GetComponent<Bottle>();
+                
+                if (explodingBottle != null)
+                {
+                    // Trigger the explosion
+                    explodingBottle.Explode();
+                    Debug.Log("Bottle exploded!");
+                }
+        }
+
         Destroy(gameObject);
     }
 
