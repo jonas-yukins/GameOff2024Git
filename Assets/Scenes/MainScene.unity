@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 11982678}
   m_Layer: 0
   m_Name: RedTarget (3)
-  m_TagString: Enemy
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11982676}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 42944364}
   m_Layer: 0
   m_Name: DoorWall
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 76458505}
   m_Layer: 0
   m_Name: Door (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 131386870}
   m_Layer: 0
   m_Name: RedTarget
-  m_TagString: Enemy
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -620,7 +620,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131386865}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 206428505}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -709,7 +709,7 @@ GameObject:
   - component: {fileID: 290938646}
   m_Layer: 6
   m_Name: Keypad
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 322778827}
   m_Layer: 0
   m_Name: Door (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1160,7 +1160,7 @@ GameObject:
   - component: {fileID: 332048466}
   m_Layer: 0
   m_Name: DoorWall (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1271,7 +1271,7 @@ GameObject:
   - component: {fileID: 347975182}
   m_Layer: 0
   m_Name: DoorWall (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1376,7 +1376,7 @@ GameObject:
   - component: {fileID: 355488401}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1481,7 +1481,7 @@ GameObject:
   - component: {fileID: 366500427}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1701,7 +1701,7 @@ GameObject:
   - component: {fileID: 412401633}
   m_Layer: 0
   m_Name: Props
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1739,7 +1739,7 @@ GameObject:
   - component: {fileID: 421268724}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1847,7 +1847,7 @@ GameObject:
   - component: {fileID: 422803944}
   m_Layer: 0
   m_Name: DoorFrame (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2013,6 +2013,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigCloset
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a20abce8e4655294886742eb9bb5c382,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2029,7 +2034,7 @@ GameObject:
   - component: {fileID: 488049765}
   m_Layer: 0
   m_Name: DoorFrame (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2411,6 +2416,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallCloset
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 947941c3770ac9749a60dfb2404d1ad3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2427,7 +2437,7 @@ GameObject:
   - component: {fileID: 584531727}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2466,7 +2476,7 @@ GameObject:
   - component: {fileID: 673465055}
   m_Layer: 0
   m_Name: RedTarget (4)
-  m_TagString: Enemy
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2494,7 +2504,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673465053}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2726,7 +2736,7 @@ GameObject:
   - component: {fileID: 712880554}
   m_Layer: 0
   m_Name: DoorWall
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2991,7 +3001,7 @@ GameObject:
   - component: {fileID: 837611643}
   m_Layer: 0
   m_Name: DoorWall (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3210,7 +3220,7 @@ GameObject:
   - component: {fileID: 879388930}
   m_Layer: 0
   m_Name: DoorWall
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3478,7 +3488,7 @@ GameObject:
   - component: {fileID: 910043045}
   m_Layer: 0
   m_Name: DoorWall (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3693,6 +3703,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: chair (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a65804b782e378e46a402e06983b7be4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3905,7 +3920,7 @@ GameObject:
   - component: {fileID: 994748146}
   m_Layer: 0
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4046,7 +4061,7 @@ GameObject:
   - component: {fileID: 1038389324}
   m_Layer: 0
   m_Name: Floor (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4152,7 +4167,7 @@ GameObject:
   - component: {fileID: 1061192766}
   m_Layer: 0
   m_Name: RedTarget (2)
-  m_TagString: Enemy
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4180,7 +4195,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061192764}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4406,6 +4421,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MetalTable
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1c77c68a06728d143a0320dfcc126c48,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4425,7 +4445,7 @@ GameObject:
   - component: {fileID: 1084493791}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4584,6 +4604,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: chair (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a65804b782e378e46a402e06983b7be4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4610,7 +4635,7 @@ GameObject:
   - component: {fileID: 1114038977}
   m_Layer: 0
   m_Name: RedTarget (5)
-  m_TagString: Enemy
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4638,7 +4663,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114038975}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4795,6 +4820,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoundTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c4bf5ec91ea67e94fb25bfe2b9808275,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5024,7 +5054,7 @@ GameObject:
   - component: {fileID: 1192561208}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5126,7 +5156,7 @@ GameObject:
   - component: {fileID: 1230035162}
   m_Layer: 0
   m_Name: Room1
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5169,7 +5199,7 @@ GameObject:
   - component: {fileID: 1245883628}
   m_Layer: 0
   m_Name: Door (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5291,7 +5321,7 @@ GameObject:
   - component: {fileID: 1246161523}
   m_Layer: 0
   m_Name: RedTarget (1)
-  m_TagString: Enemy
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5319,7 +5349,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246161521}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5423,7 +5453,7 @@ GameObject:
   - component: {fileID: 1274063054}
   m_Layer: 0
   m_Name: DoorWall (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5525,7 +5555,7 @@ GameObject:
   - component: {fileID: 1275864690}
   m_Layer: 0
   m_Name: DoorFrame
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5559,7 +5589,7 @@ GameObject:
   - component: {fileID: 1280142712}
   m_Layer: 0
   m_Name: Props
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5609,7 +5639,7 @@ GameObject:
   - component: {fileID: 1316131355}
   m_Layer: 0
   m_Name: DoorWall
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5714,7 +5744,7 @@ GameObject:
   - component: {fileID: 1325987948}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5819,7 +5849,7 @@ GameObject:
   - component: {fileID: 1326067074}
   m_Layer: 0
   m_Name: DoorWall (2)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5961,7 +5991,7 @@ GameObject:
   - component: {fileID: 1383363679}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6063,7 +6093,7 @@ GameObject:
   - component: {fileID: 1445568982}
   m_Layer: 0
   m_Name: Room2
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6111,7 +6141,7 @@ GameObject:
   - component: {fileID: 1488627946}
   m_Layer: 0
   m_Name: DoorWall (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6269,6 +6299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: chair
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a65804b782e378e46a402e06983b7be4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6443,7 +6478,7 @@ GameObject:
   - component: {fileID: 1564130153}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6546,7 +6581,7 @@ GameObject:
   - component: {fileID: 1580998321}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6604,7 +6639,7 @@ GameObject:
   - component: {fileID: 1626655769}
   m_Layer: 0
   m_Name: Door (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6797,7 +6832,7 @@ GameObject:
   - component: {fileID: 1654284373}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6840,7 +6875,7 @@ GameObject:
   - component: {fileID: 1683815789}
   m_Layer: 0
   m_Name: TargetWall
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6937,6 +6972,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683815787}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1690756439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690756441}
+  - component: {fileID: 1690756440}
+  m_Layer: 0
+  m_Name: GlobalReferences
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1690756440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690756439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f04220a698a4633853e96614c2d744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletImpactEffectPrefab: {fileID: 4098691180188222193, guid: 511d3879f98e14a89bac59c043513ad1,
+    type: 3}
+--- !u!4 &1690756441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690756439}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.975, y: 1.266, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1764886012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6835159927189020221, guid: 4da9f6017c5c2954282fe23c8f297ec2,
@@ -6985,7 +7066,7 @@ GameObject:
   - component: {fileID: 1823427744}
   m_Layer: 0
   m_Name: DoorFrame
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7158,7 +7239,7 @@ GameObject:
   - component: {fileID: 1963396733}
   m_Layer: 0
   m_Name: DoorWall (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7486,7 +7567,7 @@ GameObject:
   - component: {fileID: 2052521064}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7592,7 +7673,7 @@ GameObject:
   - component: {fileID: 2078955471}
   m_Layer: 6
   m_Name: Keypad (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7854,6 +7935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 3Seat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165582997407286407, guid: 4da9f6017c5c2954282fe23c8f297ec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 6835159927189020221, guid: 4da9f6017c5c2954282fe23c8f297ec2,
         type: 3}
@@ -8160,3 +8246,4 @@ SceneRoots:
   - {fileID: 887679782}
   - {fileID: 1912118508}
   - {fileID: 1017641824}
+  - {fileID: 1690756441}

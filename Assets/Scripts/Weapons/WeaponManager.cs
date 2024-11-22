@@ -6,6 +6,8 @@ public class WeaponManager : MonoBehaviour
 {
     public Weapon currentWeapon;
     public Transform cameraTransform;
+
+    // Weapons
     public GameObject AssaultRiflePrefab;
 
     void Start()
