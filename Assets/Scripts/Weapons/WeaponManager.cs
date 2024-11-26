@@ -9,11 +9,13 @@ public class WeaponManager : MonoBehaviour
 
     // Weapons
     public GameObject AssaultRiflePrefab;
+    public GameObject PistolPrefab;
+    public GameObject ShotgunPrefab;
 
     void Start()
     {
         cameraTransform = Camera.main.transform;
-        EquipWeapon(AssaultRiflePrefab);  // Equip initial weapon
+        EquipWeapon(ShotgunPrefab);  // Equip initial weapon
     }
 
     public void EquipWeapon(GameObject newWeaponPrefab)
@@ -25,13 +27,6 @@ public class WeaponManager : MonoBehaviour
 
         GameObject weaponObject = Instantiate(newWeaponPrefab, cameraTransform);
         currentWeapon = weaponObject.GetComponent<Weapon>();  // Get the Weapon component
-        SetWeaponPositionAndRotation(weaponObject);
-    }
-
-    private void SetWeaponPositionAndRotation(GameObject weaponObject)
-    {
-        weaponObject.transform.localPosition = new Vector3(0.328f, -0.359f, 0.985f);  // Position adjustment
-        weaponObject.transform.localRotation = Quaternion.Euler(0f, 6f, 0f);  // Rotation adjustment
     }
 
     public void HandleFire(bool isFiring)
