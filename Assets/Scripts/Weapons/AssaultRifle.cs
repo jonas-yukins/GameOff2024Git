@@ -12,6 +12,5 @@ public class AssaultRifle : Weapon
     public override void Reload()
     {
         base.Reload();
-        ammoCount = 30;  // Specific ammo count for the Assault Rifle
     }
 }

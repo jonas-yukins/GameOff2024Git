@@ -164,8 +164,8 @@ MonoBehaviour:
   bulletLifeTime: 3
   maxAmmo: 12
   ammoCount: 12
-  fireRate: 0.1
-  reloadTime: 2
+  fireRate: 0.3
+  reloadTime: 1.5
   bulletPerBurst: 3
   currentBurst: 0
   spreadIntensity: 0.01
@@ -219,7 +219,7 @@ Transform:
   m_GameObject: {fileID: 4686487288596231008}
   serializedVersion: 2
   m_LocalRotation: {x: -0.17949022, y: 0, z: -0, w: 0.98375976}
-  m_LocalPosition: {x: -0, y: -0.051864732, z: 0.047690168}
+  m_LocalPosition: {x: 0, y: -0.051864732, z: 0.04769017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -302,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 5513972010310572202}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.008086923, z: -0.13872743}
+  m_LocalPosition: {x: 0, y: 0.008086923, z: -0.13872743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5168,7 +5168,7 @@ Transform:
   m_GameObject: {fileID: 6147669163397686530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.039497424, z: 0.0456995}
+  m_LocalPosition: {x: 0, y: 0.039497424, z: 0.0456995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
@@ -50,6 +51,19 @@ public abstract class Weapon : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    public void Update()
+    {
+        if (AmmoManager.Instance.ammoDisplay != null)
+        {
+            AmmoManager.Instance.ammoDisplay.text = $"{ammoCount}/{maxAmmo}";
+        }
+
+        if (ammoCount == 0 && isFiring)
+        {
+            SoundManager.Instance.emptyMagazineSound1911.Play();
+        }
+    }
+
     public virtual void StartFire()
     {
         if (isReloading)
@@ -96,63 +110,65 @@ public abstract class Weapon : MonoBehaviour
     }
 
     protected virtual void Fire()
-{
-    if (ammoCount > 0)
     {
-        muzzleEffect.GetComponent<ParticleSystem>().Play();
-        animator.SetTrigger("RECOIL");
-
-        SoundManager.Instance.shootingSound1911.Play();
-
-        // Fire towards the crosshair (center of the screen)
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Ray from the center of the screen
-        RaycastHit hit;
-        Vector3 targetPoint = ray.origin + ray.direction * 100f; // Default to a far distance if no hit occurs
-
-        // If the ray hits something, we use the hit point as the target point
-        if (Physics.Raycast(ray, out hit))
+        if (ammoCount > 0)
         {
-            targetPoint = hit.point; 
+            muzzleEffect.GetComponent<ParticleSystem>().Play();
+            animator.SetTrigger("RECOIL");
+
+            SoundManager.Instance.shootingSound1911.Play();
+
+            // Fire towards the crosshair (center of the screen)
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Ray from the center of the screen
+            RaycastHit hit;
+            Vector3 targetPoint = ray.origin + ray.direction * 100f; // Default to a far distance if no hit occurs
+
+            // If the ray hits something, we use the hit point as the target point
+            if (Physics.Raycast(ray, out hit))
+            {
+                targetPoint = hit.point; 
+            }
+
+            // Calculate direction from the gun barrel to the target point
+            Vector3 directionToTarget = (targetPoint - gunbarrel.position).normalized;
+
+            // Apply random spread
+            Vector3 spreadOffset = new Vector3(
+                Random.Range(-spreadIntensity, spreadIntensity),  // Random X spread
+                Random.Range(-spreadIntensity, spreadIntensity),  // Random Y spread
+                Random.Range(-spreadIntensity, spreadIntensity)   // Random Z spread
+            );
+
+            // Apply the spread offset to the direction vector
+            Vector3 finalDirection = directionToTarget + spreadOffset;
+
+            // Normalize the direction to keep the bullet speed constant
+            finalDirection.Normalize();
+
+            // Instantiate the bullet at the gun barrel
+            GameObject bullet = Instantiate(bulletPrefab, gunbarrel.position, gunbarrel.rotation);
+
+            // Apply force to the bullet in the final direction
+            bullet.GetComponent<Rigidbody>().AddForce(finalDirection * bulletVelocity, ForceMode.Impulse);
+
+            // Destroy the bullet after a set time
+            Destroy(bullet, bulletLifeTime);
+
+            ammoCount--;  // Decrease ammo
+            Debug.Log($"Ammo left: {ammoCount}");
         }
-
-        // Calculate direction from the gun barrel to the target point
-        Vector3 directionToTarget = (targetPoint - gunbarrel.position).normalized;
-
-        // Apply random spread
-        Vector3 spreadOffset = new Vector3(
-            Random.Range(-spreadIntensity, spreadIntensity),  // Random X spread
-            Random.Range(-spreadIntensity, spreadIntensity),  // Random Y spread
-            Random.Range(-spreadIntensity, spreadIntensity)   // Random Z spread
-        );
-
-        // Apply the spread offset to the direction vector
-        Vector3 finalDirection = directionToTarget + spreadOffset;
-
-        // Normalize the direction to keep the bullet speed constant
-        finalDirection.Normalize();
-
-        // Instantiate the bullet at the gun barrel
-        GameObject bullet = Instantiate(bulletPrefab, gunbarrel.position, gunbarrel.rotation);
-
-        // Apply force to the bullet in the final direction
-        bullet.GetComponent<Rigidbody>().AddForce(finalDirection * bulletVelocity, ForceMode.Impulse);
-
-        // Destroy the bullet after a set time
-        Destroy(bullet, bulletLifeTime);
-
-        ammoCount--;  // Decrease ammo
-        Debug.Log($"Ammo left: {ammoCount}");
+        else
+        {
+            Debug.Log("Out of ammo!");
+            SoundManager.Instance.emptyMagazineSound1911.Play(); // empty magazine sound
+            // Reload(); // Auto reload if out of ammo
+        }
     }
-    else
-    {
-        Debug.Log("Out of ammo!");
-    }
-}
 
 
     private IEnumerator FireAuto()
     {
-        while (isFiring && ammoCount > 0)
+        while (isFiring)
         {
             Fire();
             yield return new WaitForSeconds(fireRate);  // Delay between automatic shots
@@ -164,7 +180,7 @@ public abstract class Weapon : MonoBehaviour
         isFiring = true;
         currentBurst = bulletPerBurst;
 
-        while (currentBurst > 0 && ammoCount > 0)
+        while (currentBurst > 0)
         {
             Fire();
             currentBurst--;
@@ -181,13 +197,15 @@ public abstract class Weapon : MonoBehaviour
 
         isReloading = true;
         StopFire();
+        SoundManager.Instance.reloadingSound1911.Play();
+        animator.SetTrigger("RELOAD");
         StartCoroutine(ReloadCoroutine());
     }
 
     private IEnumerator ReloadCoroutine()
     {
         yield return new WaitForSeconds(reloadTime);
-        ammoCount = maxAmmo;
+        ammoCount = maxAmmo; // reset ammo count
         isReloading = false;
         Debug.Log("Reloaded!");
     }

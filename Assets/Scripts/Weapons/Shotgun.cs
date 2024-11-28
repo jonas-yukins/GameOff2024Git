@@ -29,6 +29,8 @@ public class Shotgun : Weapon
         else
         {
             Debug.Log("Out of ammo!");
+            SoundManager.Instance.emptyMagazineSound1911.Play();
+            //Reload(); // Auto reload if out of ammo
         }
     }
 
@@ -57,5 +59,10 @@ public class Shotgun : Weapon
 
         // Destroy the pellet after a set time
         Destroy(pellet, bulletLifeTime);
+    }
+
+    public override void Reload()
+    {
+        base.Reload();
     }
 }
