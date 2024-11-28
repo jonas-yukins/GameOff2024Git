@@ -11,6 +11,12 @@ public class Shotgun : Weapon
     {
         if (ammoCount > 0)
         {
+            // Animations Effect
+            muzzleEffect.GetComponent<ParticleSystem>().Play();
+            animator.SetTrigger("RECOIL");
+
+            SoundManager.Instance.shootingSound1911.Play();
+
             // Fire multiple pellets with random spread
             for (int i = 0; i < pelletsPerShot; i++)
             {

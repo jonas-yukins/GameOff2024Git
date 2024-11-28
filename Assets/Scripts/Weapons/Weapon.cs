@@ -30,6 +30,11 @@ public abstract class Weapon : MonoBehaviour
     // Spread
     public float spreadIntensity = 0.01f;
 
+    // Animation
+    public GameObject muzzleEffect;
+    protected Animator animator;
+
+
     // Shooting Modes
     public enum ShootingMode
     {
@@ -39,6 +44,11 @@ public abstract class Weapon : MonoBehaviour
     }
 
     public ShootingMode currentShootingMode;
+
+    public void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public virtual void StartFire()
     {
@@ -89,6 +99,11 @@ public abstract class Weapon : MonoBehaviour
 {
     if (ammoCount > 0)
     {
+        muzzleEffect.GetComponent<ParticleSystem>().Play();
+        animator.SetTrigger("RECOIL");
+
+        SoundManager.Instance.shootingSound1911.Play();
+
         // Fire towards the crosshair (center of the screen)
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Ray from the center of the screen
         RaycastHit hit;
