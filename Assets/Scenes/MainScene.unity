@@ -3284,13 +3284,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWeapon: {fileID: 0}
   cameraTransform: {fileID: 1834059219}
-  AssaultRiflePrefab: {fileID: 4538115411440962457, guid: 34f996f03b0674a7c9d1d725f80324a6,
+  AssaultRiflePrefab: {fileID: 73755134482518778, guid: e6c17a1d5ef8e46b4879b550c41e1c47,
     type: 3}
   PistolPrefab: {fileID: 3610975316853091727, guid: 5124ef8abd3e24a02befb97f6b1db6e0,
     type: 3}
   ShotgunPrefab: {fileID: 3041619684782690646, guid: e598dd9350db84dd190f66fcd0d5a2bd,
     type: 3}
-  weaponPrefabs: []
+  weaponPrefabs:
+  - {fileID: 3610975316853091727, guid: 5124ef8abd3e24a02befb97f6b1db6e0, type: 3}
+  - {fileID: 73755134482518778, guid: e6c17a1d5ef8e46b4879b550c41e1c47, type: 3}
+  - {fileID: 3041619684782690646, guid: e598dd9350db84dd190f66fcd0d5a2bd, type: 3}
 --- !u!1 &879388928
 GameObject:
   m_ObjectHideFlags: 0

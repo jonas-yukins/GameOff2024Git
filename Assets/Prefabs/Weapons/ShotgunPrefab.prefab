@@ -61,16 +61,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3041619684782690646}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.221, y: -0.267, z: 1.074}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 1
+  m_LocalRotation: {x: 0, y: 0.9990483, z: -0, w: -0.043619405}
+  m_LocalPosition: {x: 0.42, y: -0.305, z: 1.14}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4026181999923966798}
   - {fileID: 8145431350652845519}
   - {fileID: 5445392997888418405}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 185, z: 0}
 --- !u!33 &6808490280690066222
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   maxAmmo: 6
   ammoCount: 6
   fireRate: 0.75
-  reloadTime: 2.5
+  reloadTime: 2
   bulletPerBurst: 3
   currentBurst: 0
   spreadIntensity: 0.01

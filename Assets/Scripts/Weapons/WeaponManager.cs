@@ -53,7 +53,7 @@ public class WeaponManager : MonoBehaviour
 
     public void Reload()
     {
-        if (currentWeapon != null)
+        if (currentWeapon != null && currentWeapon.ammoCount != currentWeapon.maxAmmo)
         {
             currentWeapon.Reload();  // Reload the current weapon
         }
