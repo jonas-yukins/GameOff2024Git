@@ -65,13 +65,13 @@ public class InputManager : MonoBehaviour
                 {
                     // Switch to the second weapon (Shotgun)
                     weaponManager.SwitchWeapon(1);
-                    Debug.Log("Switched to Shotgun");
+                    Debug.Log("Switched to Assault Rifle");
                 }
                 else if (ctx.control.name == "3")
                 {
                     // Switch to the third weapon (Assault Rifle)
                     weaponManager.SwitchWeapon(2);
-                    Debug.Log("Switched to Assault Rifle");
+                    Debug.Log("Switched to Shotgun");
                 }
             }
         }

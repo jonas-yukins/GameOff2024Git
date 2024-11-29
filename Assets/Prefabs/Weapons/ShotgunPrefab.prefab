@@ -139,15 +139,16 @@ MonoBehaviour:
   bulletVelocity: 500
   bulletLifeTime: 3
   maxAmmo: 6
-  ammoCount: 6
+  ammoCount: 0
   fireRate: 0.75
   reloadTime: 2
   bulletPerBurst: 3
   currentBurst: 0
   spreadIntensity: 0.01
   muzzleEffect: {fileID: 8232236579699432661}
+  animator: {fileID: 0}
   currentShootingMode: 0
-  pelletsPerShot: 8
+  pelletsPerShot: 12
   spreadAngle: 0.1
 --- !u!114 &-6770246810997333279
 MonoBehaviour:

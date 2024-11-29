@@ -38,6 +38,10 @@ public class WeaponManager : MonoBehaviour
 
         GameObject weaponObject = Instantiate(newWeaponPrefab, cameraTransform);
         currentWeapon = weaponObject.GetComponent<Weapon>();  // Get the Weapon component
+
+        // set ammoCount = maxAmmo
+        currentWeapon.Reload();
+        currentWeapon.animator.SetTrigger("RELOAD");
     }
 
     public void HandleFire(bool isFiring)

@@ -33,7 +33,7 @@ public abstract class Weapon : MonoBehaviour
 
     // Animation
     public GameObject muzzleEffect;
-    protected Animator animator;
+    public Animator animator;
 
 
     // Shooting Modes
@@ -56,11 +56,6 @@ public abstract class Weapon : MonoBehaviour
         if (AmmoManager.Instance.ammoDisplay != null)
         {
             AmmoManager.Instance.ammoDisplay.text = $"{ammoCount}/{maxAmmo}";
-        }
-
-        if (ammoCount == 0 && isFiring)
-        {
-            SoundManager.Instance.emptyMagazineSound1911.Play();
         }
     }
 
