@@ -28,6 +28,10 @@ public abstract class Weapon : MonoBehaviour
     public int bulletPerBurst = 3;
     public int currentBurst;
 
+    // Pellets
+    public int pelletsPerShot = 15;  // Number of pellets fired per shot
+    private int currentPellets;
+
     // Spread
     public float spreadIntensity = 0.01f;
 
@@ -35,12 +39,22 @@ public abstract class Weapon : MonoBehaviour
     public GameObject muzzleEffect;
     public Animator animator;
 
+    public enum WeaponModel
+    {
+        Pistol,
+        AssaultRifle,
+        Shotgun
+    }
+
+    public WeaponModel thisWeaponModel;
+
 
     // Shooting Modes
     public enum ShootingMode
     {
         Single,
         Burst,
+        Pellets,
         Auto
     }
 
@@ -85,7 +99,15 @@ public abstract class Weapon : MonoBehaviour
                 {
                     StartCoroutine(FireBurst());
                 }
-            } 
+            }
+            else if (currentShootingMode == ShootingMode.Pellets)
+            {
+                // Shotgun Mode: Fire a set number of bullets
+                if (!isFiring)
+                {
+                    StartCoroutine(FirePellets());
+                }
+            }
             else 
             {
                 // Single Shot
@@ -111,7 +133,7 @@ public abstract class Weapon : MonoBehaviour
             muzzleEffect.GetComponent<ParticleSystem>().Play();
             animator.SetTrigger("RECOIL");
 
-            SoundManager.Instance.shootingSound1911.Play();
+            SoundManager.Instance.PlayShootingSound(thisWeaponModel);
 
             // Fire towards the crosshair (center of the screen)
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)); // Ray from the center of the screen
@@ -149,13 +171,16 @@ public abstract class Weapon : MonoBehaviour
             // Destroy the bullet after a set time
             Destroy(bullet, bulletLifeTime);
 
-            ammoCount--;  // Decrease ammo
+            if (currentShootingMode != ShootingMode.Pellets) {
+                // if gun is on Pellet mode, ammo is handled differently
+                ammoCount--;  // Decrease ammo
+            }
             Debug.Log($"Ammo left: {ammoCount}");
         }
         else
         {
             Debug.Log("Out of ammo!");
-            SoundManager.Instance.emptyMagazineSound1911.Play(); // empty magazine sound
+            SoundManager.Instance.emptyMagazineSound.Play(); // empty magazine sound
             // Reload(); // Auto reload if out of ammo
         }
     }
@@ -185,14 +210,35 @@ public abstract class Weapon : MonoBehaviour
         isFiring = false;
     }
 
+    private IEnumerator FirePellets()
+    {
+        isFiring = true;
+        currentPellets = pelletsPerShot;
+        
+        while (currentPellets > 0)
+        {
+            Fire();
+            currentPellets--;
+        }
+
+        if (ammoCount > 0) {
+            ammoCount--;
+        }
+
+        yield return new WaitForSeconds(fireRate);
+        isFiring = false;
+    }
+
     public virtual void Reload()
     {
-        if (isReloading)
+        if (isReloading) {
             return;
+        }
 
         isReloading = true;
         StopFire();
-        SoundManager.Instance.reloadingSound1911.Play();
+
+        SoundManager.Instance.PlayReloadSound(thisWeaponModel);
         animator.SetTrigger("RELOAD");
         StartCoroutine(ReloadCoroutine());
     }

@@ -7,22 +7,12 @@ public class WeaponManager : MonoBehaviour
     public Weapon currentWeapon;
     public Transform cameraTransform;
 
-    // Weapons
-    public GameObject AssaultRiflePrefab;
-    public GameObject PistolPrefab;
-    public GameObject ShotgunPrefab;
-
     private int currentWeaponIndex = 0;  // Start with the first weapon (Pistol)
     public List<GameObject> weaponPrefabs = new List<GameObject>();  // List of weapon prefabs
 
     void Start()
     {
         cameraTransform = Camera.main.transform;
-
-        // Add all available weapons to the list
-        weaponPrefabs.Add(PistolPrefab);
-        weaponPrefabs.Add(AssaultRiflePrefab);
-        weaponPrefabs.Add(ShotgunPrefab);
 
         //Debug.Log(weaponPrefabs[0] + ", " + weaponPrefabs[1] + ", " + weaponPrefabs[2]);
 
@@ -40,8 +30,8 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = weaponObject.GetComponent<Weapon>();  // Get the Weapon component
 
         // set ammoCount = maxAmmo
+        // plays animation
         currentWeapon.Reload();
-        currentWeapon.animator.SetTrigger("RELOAD");
     }
 
     public void HandleFire(bool isFiring)
