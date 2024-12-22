@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
+    public static WeaponManager Instance { get; private set; }  // Singleton Instance
+
     public Weapon currentWeapon;
     public Transform cameraTransform;
 
     private int currentWeaponIndex = 0;  // Start with the first weapon (Pistol)
     public List<GameObject> weaponPrefabs = new List<GameObject>();  // List of weapon prefabs
 
-    void Start()
+    void Awake()
     {
-        cameraTransform = Camera.main.transform;
+        // Ensure only one instance of WeaponManager exists
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);  // Destroy any duplicate WeaponManager
+        }
+        else
+        {
+            Instance = this;  // Set this instance as the singleton
+        }
 
-        //Debug.Log(weaponPrefabs[0] + ", " + weaponPrefabs[1] + ", " + weaponPrefabs[2]);
+        cameraTransform = Camera.main.transform;
 
         EquipWeapon(weaponPrefabs[currentWeaponIndex]);  // Default to the first weapon
     }

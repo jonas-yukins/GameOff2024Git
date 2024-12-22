@@ -67,10 +67,7 @@ public abstract class Weapon : MonoBehaviour
 
     public void Update()
     {
-        if (AmmoManager.Instance.ammoDisplay != null)
-        {
-            AmmoManager.Instance.ammoDisplay.text = $"{ammoCount}/{maxAmmo}";
-        }
+        
     }
 
     public virtual void StartFire()

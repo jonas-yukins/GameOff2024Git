@@ -7,19 +7,19 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; set; }
 
-    // Pistol
-    public AudioSource shootingSound1911;
-    public AudioSource reloadingSound1911;
+    // Shooting
+    public AudioSource ShootingChannel;
+    public AudioClip P1911Shot;
+    public AudioClip AK47Shot;
+    public AudioClip ShotgunShot;
 
-    // Assault Rifle
-    public AudioSource shootingSoundAK47;
-    public AudioSource reloadingSoundAK47;
+    // Reloading
+    public AudioSource ReloadingChannel;
+    public AudioClip P1911Reload;
+    public AudioClip AK47Reload;
+    public AudioClip ShotgunReload;
 
-    // Shotgun
-    public AudioSource shootingSoundShotgun;
-    public AudioSource reloadingSoundShotgun;
-
-
+    // Empty clip
     public AudioSource emptyMagazineSound;
 
     private void Awake()
@@ -40,15 +40,15 @@ public class SoundManager : MonoBehaviour
         {
             case Weapon.WeaponModel.Pistol:
                 // Pistol
-                shootingSound1911.Play();
+                ShootingChannel.PlayOneShot(P1911Shot);
                 break;
             case Weapon.WeaponModel.AssaultRifle:
                 // Assault Rifle
-                shootingSoundAK47.Play();
+                ShootingChannel.PlayOneShot(AK47Shot);
                 break;
             case Weapon.WeaponModel.Shotgun:
                 // Shotgun
-                shootingSoundShotgun.Play();
+                ShootingChannel.PlayOneShot(ShotgunShot);
                 break;
         }
     }
@@ -59,15 +59,15 @@ public class SoundManager : MonoBehaviour
         {
             case Weapon.WeaponModel.Pistol:
                 // Pistol
-                reloadingSound1911.Play();
+                ReloadingChannel.PlayOneShot(P1911Reload);
                 break;
             case Weapon.WeaponModel.AssaultRifle:
                 // Assault Rifle
-                reloadingSoundAK47.Play();
+                ReloadingChannel.PlayOneShot(AK47Reload);
                 break;
             case Weapon.WeaponModel.Shotgun:
                 // Shotgun
-                reloadingSoundShotgun.Play();
+                ReloadingChannel.PlayOneShot(ShotgunReload);
                 break;
         }
     }
