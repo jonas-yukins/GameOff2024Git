@@ -138,8 +138,9 @@ MonoBehaviour:
     type: 3}
   bulletVelocity: 500
   bulletLifeTime: 3
-  maxAmmo: 6
+  magazineSize: 6
   ammoCount: 0
+  totalAmmo: 18
   fireRate: 0.75
   reloadTime: 2
   bulletPerBurst: 3

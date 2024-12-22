@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +40,7 @@ public class WeaponManager : MonoBehaviour
         GameObject weaponObject = Instantiate(newWeaponPrefab, cameraTransform);
         currentWeapon = weaponObject.GetComponent<Weapon>();  // Get the Weapon component
 
-        // set ammoCount = maxAmmo
+        // set ammoCount = magazineSize
         // plays animation
         currentWeapon.Reload();
     }
@@ -57,7 +58,7 @@ public class WeaponManager : MonoBehaviour
 
     public void Reload()
     {
-        if (currentWeapon != null && currentWeapon.ammoCount != currentWeapon.maxAmmo)
+        if (currentWeapon != null && currentWeapon.ammoCount != currentWeapon.magazineSize && currentWeapon.totalAmmo > 0)
         {
             currentWeapon.Reload();  // Reload the current weapon
         }
@@ -71,6 +72,22 @@ public class WeaponManager : MonoBehaviour
         {
             EquipWeapon(weaponPrefabs[weaponIndex]);
             Debug.Log($"Switched to {weaponPrefabs[weaponIndex].name}");
+        }
+    }
+
+    public void PickupAmmo()
+    {
+        switch (currentWeapon)
+        {
+            case Pistol:
+                currentWeapon.totalAmmo += 48;
+                break;
+            case AssaultRifle:
+                currentWeapon.totalAmmo += 120;
+                break;
+            case Shotgun:
+                currentWeapon.totalAmmo += 18;
+                break;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -18,9 +19,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip P1911Reload;
     public AudioClip AK47Reload;
     public AudioClip ShotgunReload;
-
-    // Empty clip
-    public AudioSource emptyMagazineSound;
+    public AudioClip emptyMagazineSound;
+    public AudioClip AmmoBoxSound;
 
     private void Awake()
     {
@@ -70,5 +70,15 @@ public class SoundManager : MonoBehaviour
                 ReloadingChannel.PlayOneShot(ShotgunReload);
                 break;
         }
+    }
+
+    public void PlayEmptyMagazineSound()
+    {
+        ReloadingChannel.PlayOneShot(emptyMagazineSound);
+    }
+
+    public void PlayAmmoBoxSound()
+    {
+        ReloadingChannel.PlayOneShot(AmmoBoxSound);
     }
 }

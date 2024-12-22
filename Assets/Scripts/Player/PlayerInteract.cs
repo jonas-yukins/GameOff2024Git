@@ -23,19 +23,39 @@ public class PlayerInteract : MonoBehaviour
     }
 
     // Update is called once per frame
+    private Interactable lastInteractable;
+
     void Update()
     {
         playerUI.UpdateText(string.Empty);
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * distance);
-        RaycastHit hitInfo; // variable to store our collision info
-        if (Physics.Raycast(ray, out hitInfo, distance, mask)) {
-            if (hitInfo.collider.GetComponent<Interactable>() != null) {
-                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                playerUI.UpdateText(interactable.promptMessage);
-                if (inputManager.onFoot.Interact.triggered) {
-                    interactable.BaseInteract();
+        
+        RaycastHit hitInfo;
+        bool hitSomething = Physics.Raycast(ray, out hitInfo, distance, mask);
+
+        if (hitSomething && hitInfo.collider.GetComponent<Interactable>() != null) {
+            Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+
+            // If this is a new interactable, disable the outline of the last one
+            if (lastInteractable != interactable) {
+                if (lastInteractable != null) {
+                    lastInteractable.GetComponent<Outline>().enabled = false;
                 }
+                lastInteractable = interactable;
+            }
+
+            interactable.GetComponent<Outline>().enabled = true;
+            playerUI.UpdateText(interactable.promptMessage);
+
+            if (inputManager.onFoot.Interact.triggered) {
+                interactable.BaseInteract();
+            }
+        } 
+        else {
+            if (lastInteractable != null) {
+                lastInteractable.GetComponent<Outline>().enabled = false;
+                lastInteractable = null;
             }
         }
     }

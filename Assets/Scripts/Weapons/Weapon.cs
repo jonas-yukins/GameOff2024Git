@@ -12,8 +12,9 @@ public abstract class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletVelocity = 30f;
     public float bulletLifeTime = 3f;
-    public int maxAmmo = 30;
+    public int magazineSize;
     public int ammoCount;
+    public int totalAmmo;
 
     // Gun
     public float fireRate = 0.1f;  
@@ -177,7 +178,7 @@ public abstract class Weapon : MonoBehaviour
         else
         {
             Debug.Log("Out of ammo!");
-            SoundManager.Instance.emptyMagazineSound.Play(); // empty magazine sound
+            SoundManager.Instance.PlayEmptyMagazineSound();
             // Reload(); // Auto reload if out of ammo
         }
     }
@@ -241,10 +242,30 @@ public abstract class Weapon : MonoBehaviour
     }
 
     private IEnumerator ReloadCoroutine()
-    {
+    {        
+        // Wait for the reload time to pass
         yield return new WaitForSeconds(reloadTime);
-        ammoCount = maxAmmo; // reset ammo count
-        isReloading = false;
+        
+        // Check if there is enough total ammo to fill the magazine
+        if (totalAmmo >= magazineSize)
+        {
+            // The amount of ammo to refill the magazine
+            int ammoNeeded = magazineSize - ammoCount;
+
+            // Fill the magazine to full capacity
+            ammoCount = magazineSize;
+
+            // Subtract the used ammo from total ammo
+            totalAmmo -= ammoNeeded;
+        }
+        else
+        {
+            // If there isn't enough ammo to fill the magazine, just use up all remaining ammo
+            ammoCount = totalAmmo;
+            totalAmmo = 0;
+        }
+
+        isReloading = false;  // Finished reloading
         Debug.Log("Reloaded!");
     }
 }

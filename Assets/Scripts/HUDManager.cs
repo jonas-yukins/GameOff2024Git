@@ -43,7 +43,7 @@ public class HUDManager : MonoBehaviour
         if (activeWeapon)
         {
             magazineAmmoUI.text = $"{activeWeapon.ammoCount}";
-            totalAmmoUI.text = $"{activeWeapon.maxAmmo}";
+            totalAmmoUI.text = $"{activeWeapon.totalAmmo}";
 
             Weapon.WeaponModel model = activeWeapon.thisWeaponModel;
             ammoTypeUI.sprite = GetAmmoSprite(model);
