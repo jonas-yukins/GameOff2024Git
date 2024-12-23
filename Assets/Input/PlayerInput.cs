@@ -789,6 +789,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ADS"",
+                    ""type"": ""Button"",
+                    ""id"": ""6bbcdbd6-531b-4259-8268-1613b293c45a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -868,6 +877,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df75def7-8c99-4130-86a3-347c45ecb8d2"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ADS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26b25b27-eac9-4d98-94c4-03b8118d623e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ADS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -897,6 +928,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Weapon_Shoot = m_Weapon.FindAction("Shoot", throwIfNotFound: true);
         m_Weapon_Reload = m_Weapon.FindAction("Reload", throwIfNotFound: true);
         m_Weapon_SwitchWeapon = m_Weapon.FindAction("SwitchWeapon", throwIfNotFound: true);
+        m_Weapon_ADS = m_Weapon.FindAction("ADS", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1149,6 +1181,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Weapon_Shoot;
     private readonly InputAction m_Weapon_Reload;
     private readonly InputAction m_Weapon_SwitchWeapon;
+    private readonly InputAction m_Weapon_ADS;
     public struct WeaponActions
     {
         private @PlayerInput m_Wrapper;
@@ -1156,6 +1189,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Weapon_Shoot;
         public InputAction @Reload => m_Wrapper.m_Weapon_Reload;
         public InputAction @SwitchWeapon => m_Wrapper.m_Weapon_SwitchWeapon;
+        public InputAction @ADS => m_Wrapper.m_Weapon_ADS;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1174,6 +1208,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SwitchWeapon.started += instance.OnSwitchWeapon;
             @SwitchWeapon.performed += instance.OnSwitchWeapon;
             @SwitchWeapon.canceled += instance.OnSwitchWeapon;
+            @ADS.started += instance.OnADS;
+            @ADS.performed += instance.OnADS;
+            @ADS.canceled += instance.OnADS;
         }
 
         private void UnregisterCallbacks(IWeaponActions instance)
@@ -1187,6 +1224,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @SwitchWeapon.started -= instance.OnSwitchWeapon;
             @SwitchWeapon.performed -= instance.OnSwitchWeapon;
             @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
+            @ADS.started -= instance.OnADS;
+            @ADS.performed -= instance.OnADS;
+            @ADS.canceled -= instance.OnADS;
         }
 
         public void RemoveCallbacks(IWeaponActions instance)
@@ -1229,5 +1269,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnSwitchWeapon(InputAction.CallbackContext context);
+        void OnADS(InputAction.CallbackContext context);
     }
 }

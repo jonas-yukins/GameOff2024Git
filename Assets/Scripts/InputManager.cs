@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,6 +46,9 @@ public class InputManager : MonoBehaviour
 
         // Add weapon switching
         weaponActions.SwitchWeapon.performed += ctx => OnSwitchWeapon(ctx);  // Switch weapons
+
+        // Add ADS (Aim Down Sights) action
+        weaponActions.ADS.performed += ctx => weaponManager.handleADS();  // Toggle ADS on right click/left trigger
     }
 
     private void OnSwitchWeapon(InputAction.CallbackContext ctx)
@@ -76,7 +80,6 @@ public class InputManager : MonoBehaviour
             }
         }
     }
-
 
     private void OnDisable()
     {

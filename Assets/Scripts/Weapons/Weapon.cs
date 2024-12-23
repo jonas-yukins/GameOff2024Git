@@ -5,9 +5,11 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    [Header("Object References")]
     // Object references
     public Transform gunbarrel;
 
+    [Header("Bullet")]
     // Bullet
     public GameObject bulletPrefab;
     public float bulletVelocity = 30f;
@@ -16,6 +18,7 @@ public abstract class Weapon : MonoBehaviour
     public int ammoCount;
     public int totalAmmo;
 
+    [Header("Gun")]
     // Gun
     public float fireRate = 0.1f;  
     private float nextFireTime = 0f;   
@@ -24,18 +27,26 @@ public abstract class Weapon : MonoBehaviour
     // Current actions
     private bool isFiring = false;
     private bool isReloading = false;
+    private bool isADS = false;
 
+    [Header("Burst")]
     // Burst
     public int bulletPerBurst = 3;
     public int currentBurst;
 
+    [Header("Pellets")]
     // Pellets
     public int pelletsPerShot = 15;  // Number of pellets fired per shot
     private int currentPellets;
 
+    [Header("Spread")]
     // Spread
-    public float spreadIntensity = 0.01f;
+    public float hipSpreadIntensity;
+    public float adsSpreadIntensity;
+    private float spreadIntensity;
 
+
+    [Header("Animation")]
     // Animation
     public GameObject muzzleEffect;
     public Animator animator;
@@ -47,6 +58,7 @@ public abstract class Weapon : MonoBehaviour
         Shotgun
     }
 
+    [Header("Weapon Model")]
     public WeaponModel thisWeaponModel;
 
 
@@ -59,16 +71,13 @@ public abstract class Weapon : MonoBehaviour
         Auto
     }
 
+    [Header("Shooting Mode")]
     public ShootingMode currentShootingMode;
 
     public void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-
-    public void Update()
-    {
-        
+        spreadIntensity = hipSpreadIntensity;
     }
 
     public virtual void StartFire()
@@ -129,7 +138,15 @@ public abstract class Weapon : MonoBehaviour
         if (ammoCount > 0)
         {
             muzzleEffect.GetComponent<ParticleSystem>().Play();
-            animator.SetTrigger("RECOIL");
+
+            if (isADS)
+            {
+                animator.SetTrigger("RECOIL_ADS");
+            }
+            else
+            {
+                animator.SetTrigger("RECOIL");
+            }
 
             SoundManager.Instance.PlayShootingSound(thisWeaponModel);
 
@@ -149,7 +166,7 @@ public abstract class Weapon : MonoBehaviour
 
             // Apply random spread
             Vector3 spreadOffset = new Vector3(
-                Random.Range(-spreadIntensity, spreadIntensity),  // Random X spread
+                0,
                 Random.Range(-spreadIntensity, spreadIntensity),  // Random Y spread
                 Random.Range(-spreadIntensity, spreadIntensity)   // Random Z spread
             );
@@ -233,11 +250,15 @@ public abstract class Weapon : MonoBehaviour
             return;
         }
 
-        isReloading = true;
         StopFire();
+        if (isADS) {
+            toggleADS();
+        }
+        isReloading = true;
 
-        SoundManager.Instance.PlayReloadSound(thisWeaponModel);
         animator.SetTrigger("RELOAD");
+        SoundManager.Instance.PlayReloadSound(thisWeaponModel);
+
         StartCoroutine(ReloadCoroutine());
     }
 
@@ -267,5 +288,29 @@ public abstract class Weapon : MonoBehaviour
 
         isReloading = false;  // Finished reloading
         Debug.Log("Reloaded!");
+    }
+
+    public void toggleADS()
+    {
+        if (isReloading) {
+            return;
+        }
+
+        isADS = !isADS;
+
+        if (isADS)
+        {
+            // player is aiming down sights
+            animator.SetTrigger("enterADS");
+            HUDManager.Instance.middleDot.SetActive(false);
+            spreadIntensity = adsSpreadIntensity;
+        }
+        else
+        {
+            // play is not aiming down sights
+            animator.SetTrigger("exitADS");
+            HUDManager.Instance.middleDot.SetActive(true);
+            spreadIntensity = hipSpreadIntensity;
+        }
     }
 }

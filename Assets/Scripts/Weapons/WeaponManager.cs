@@ -90,5 +90,13 @@ public class WeaponManager : MonoBehaviour
                 break;
         }
     }
+
+    public void handleADS()
+    {
+        if (currentWeapon != null)
+        {
+            currentWeapon.toggleADS();
+        }
+    }
 }
 
