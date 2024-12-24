@@ -7,9 +7,14 @@ public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager Instance { get; private set; }  // Singleton Instance
 
-    public Weapon currentWeapon;
     public Transform cameraTransform;
+    
+    public Throwable currentThrowable;
+    private int currentThrowableIndex = 0; // Start with first throwable (grenade)
+    public List<GameObject> throwablePrefabs = new List<GameObject>();  // List of lethal prefabs
 
+    
+    public Weapon currentWeapon;
     private int currentWeaponIndex = 0;  // Start with the first weapon (Pistol)
     public List<GameObject> weaponPrefabs = new List<GameObject>();  // List of weapon prefabs
 
@@ -28,6 +33,13 @@ public class WeaponManager : MonoBehaviour
         cameraTransform = Camera.main.transform;
 
         EquipWeapon(weaponPrefabs[currentWeaponIndex]);  // Default to the first weapon
+        EquipThrowable(throwablePrefabs[currentThrowableIndex]);  // Default to the first throwable
+    }
+
+    private void EquipThrowable(GameObject gameObject)
+    {
+        currentThrowable = gameObject.GetComponent<Throwable>();
+        currentThrowable.ammoCount = 2;
     }
 
     public void EquipWeapon(GameObject newWeaponPrefab)
@@ -96,6 +108,14 @@ public class WeaponManager : MonoBehaviour
         if (currentWeapon != null)
         {
             currentWeapon.toggleADS();
+        }
+    }
+
+    internal void handleThrowable()
+    {
+        if (currentThrowable != null)
+        {
+            currentThrowable.ThrowLethal();
         }
     }
 }
