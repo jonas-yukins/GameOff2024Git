@@ -776,15 +776,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Throw",
-                    "type": "Button",
-                    "id": "1d9e5095-b36b-477f-b359-43b952eebfba",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -886,26 +877,74 @@
                     "action": "ADS",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Item",
+            "id": "e6478c68-2bd9-405d-bfe1-08cf12566170",
+            "actions": [
+                {
+                    "name": "Throwable",
+                    "type": "Button",
+                    "id": "376ba092-fc36-4fb0-ad07-857d92580aab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
+                    "name": "Tactical",
+                    "type": "Button",
+                    "id": "ba51b327-52f6-40a0-be0c-05fecdfd6615",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "e3a2320e-3ebf-4a78-8e7a-86ef8d93b36e",
+                    "id": "21ead21a-2f0a-48de-b5b0-03e6e5621e21",
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw",
+                    "action": "Throwable",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d2f02aae-a4e3-4edd-894e-c5b758a23d45",
+                    "id": "15a88389-010d-433e-a8f7-ac1f84e4f97f",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw",
+                    "action": "Throwable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f6fc315-a9ba-4023-821f-bbd7ddbf8f8d",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tactical",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e46df9c4-b9d6-4f5a-80ee-88831edca4d8",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tactical",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

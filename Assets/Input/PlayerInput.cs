@@ -798,15 +798,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Throw"",
-                    ""type"": ""Button"",
-                    ""id"": ""1d9e5095-b36b-477f-b359-43b952eebfba"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -908,26 +899,74 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""ADS"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Item"",
+            ""id"": ""e6478c68-2bd9-405d-bfe1-08cf12566170"",
+            ""actions"": [
+                {
+                    ""name"": ""Throwable"",
+                    ""type"": ""Button"",
+                    ""id"": ""376ba092-fc36-4fb0-ad07-857d92580aab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Tactical"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba51b327-52f6-40a0-be0c-05fecdfd6615"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": """",
-                    ""id"": ""e3a2320e-3ebf-4a78-8e7a-86ef8d93b36e"",
+                    ""id"": ""21ead21a-2f0a-48de-b5b0-03e6e5621e21"",
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Throw"",
+                    ""action"": ""Throwable"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d2f02aae-a4e3-4edd-894e-c5b758a23d45"",
+                    ""id"": ""15a88389-010d-433e-a8f7-ac1f84e4f97f"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Throw"",
+                    ""action"": ""Throwable"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f6fc315-a9ba-4023-821f-bbd7ddbf8f8d"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tactical"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e46df9c4-b9d6-4f5a-80ee-88831edca4d8"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tactical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -960,7 +999,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Weapon_Reload = m_Weapon.FindAction("Reload", throwIfNotFound: true);
         m_Weapon_SwitchWeapon = m_Weapon.FindAction("SwitchWeapon", throwIfNotFound: true);
         m_Weapon_ADS = m_Weapon.FindAction("ADS", throwIfNotFound: true);
-        m_Weapon_Throw = m_Weapon.FindAction("Throw", throwIfNotFound: true);
+        // Item
+        m_Item = asset.FindActionMap("Item", throwIfNotFound: true);
+        m_Item_Throwable = m_Item.FindAction("Throwable", throwIfNotFound: true);
+        m_Item_Tactical = m_Item.FindAction("Tactical", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1214,7 +1256,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Weapon_Reload;
     private readonly InputAction m_Weapon_SwitchWeapon;
     private readonly InputAction m_Weapon_ADS;
-    private readonly InputAction m_Weapon_Throw;
     public struct WeaponActions
     {
         private @PlayerInput m_Wrapper;
@@ -1223,7 +1264,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_Weapon_Reload;
         public InputAction @SwitchWeapon => m_Wrapper.m_Weapon_SwitchWeapon;
         public InputAction @ADS => m_Wrapper.m_Weapon_ADS;
-        public InputAction @Throw => m_Wrapper.m_Weapon_Throw;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1245,9 +1285,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ADS.started += instance.OnADS;
             @ADS.performed += instance.OnADS;
             @ADS.canceled += instance.OnADS;
-            @Throw.started += instance.OnThrow;
-            @Throw.performed += instance.OnThrow;
-            @Throw.canceled += instance.OnThrow;
         }
 
         private void UnregisterCallbacks(IWeaponActions instance)
@@ -1264,9 +1301,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @ADS.started -= instance.OnADS;
             @ADS.performed -= instance.OnADS;
             @ADS.canceled -= instance.OnADS;
-            @Throw.started -= instance.OnThrow;
-            @Throw.performed -= instance.OnThrow;
-            @Throw.canceled -= instance.OnThrow;
         }
 
         public void RemoveCallbacks(IWeaponActions instance)
@@ -1284,6 +1318,60 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public WeaponActions @Weapon => new WeaponActions(this);
+
+    // Item
+    private readonly InputActionMap m_Item;
+    private List<IItemActions> m_ItemActionsCallbackInterfaces = new List<IItemActions>();
+    private readonly InputAction m_Item_Throwable;
+    private readonly InputAction m_Item_Tactical;
+    public struct ItemActions
+    {
+        private @PlayerInput m_Wrapper;
+        public ItemActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Throwable => m_Wrapper.m_Item_Throwable;
+        public InputAction @Tactical => m_Wrapper.m_Item_Tactical;
+        public InputActionMap Get() { return m_Wrapper.m_Item; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ItemActions set) { return set.Get(); }
+        public void AddCallbacks(IItemActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ItemActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ItemActionsCallbackInterfaces.Add(instance);
+            @Throwable.started += instance.OnThrowable;
+            @Throwable.performed += instance.OnThrowable;
+            @Throwable.canceled += instance.OnThrowable;
+            @Tactical.started += instance.OnTactical;
+            @Tactical.performed += instance.OnTactical;
+            @Tactical.canceled += instance.OnTactical;
+        }
+
+        private void UnregisterCallbacks(IItemActions instance)
+        {
+            @Throwable.started -= instance.OnThrowable;
+            @Throwable.performed -= instance.OnThrowable;
+            @Throwable.canceled -= instance.OnThrowable;
+            @Tactical.started -= instance.OnTactical;
+            @Tactical.performed -= instance.OnTactical;
+            @Tactical.canceled -= instance.OnTactical;
+        }
+
+        public void RemoveCallbacks(IItemActions instance)
+        {
+            if (m_Wrapper.m_ItemActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IItemActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ItemActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ItemActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ItemActions @Item => new ItemActions(this);
     public interface IOnFootActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -1310,6 +1398,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnSwitchWeapon(InputAction.CallbackContext context);
         void OnADS(InputAction.CallbackContext context);
-        void OnThrow(InputAction.CallbackContext context);
+    }
+    public interface IItemActions
+    {
+        void OnThrowable(InputAction.CallbackContext context);
+        void OnTactical(InputAction.CallbackContext context);
     }
 }

@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     private PlayerInput playerInput;
     public PlayerInput.OnFootActions onFoot;
     public PlayerInput.WeaponActions weaponActions;
+    public PlayerInput.ItemActions itemActions;
     private PlayerMotor motor;
     private PlayerLook look;
     private WeaponManager weaponManager;
@@ -16,6 +17,7 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
         weaponActions = playerInput.Weapon;
+        itemActions = playerInput.Item;
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
@@ -37,6 +39,7 @@ public class InputManager : MonoBehaviour
         // Enable actions
         onFoot.Enable();
         weaponActions.Enable();
+        itemActions.Enable();
 
         // Jump
         onFoot.Jump.performed += ctx => motor.Jump();
@@ -55,7 +58,10 @@ public class InputManager : MonoBehaviour
         weaponActions.ADS.performed += ctx => weaponManager.handleADS();  // Toggle ADS on right click/left trigger
 
         // Throwable
-        weaponActions.Throw.performed += ctx => weaponManager.handleThrowable();
+        itemActions.Throwable.performed += ctx => weaponManager.handleThrowable();
+
+        // Tactical
+        itemActions.Tactical.performed += ctx => weaponManager.handleTactical();
     }
 
     private void OnSwitchWeapon(InputAction.CallbackContext ctx)
@@ -92,5 +98,6 @@ public class InputManager : MonoBehaviour
     {
         onFoot.Disable();
         weaponActions.Disable();
+        itemActions.Disable();
     }
 }

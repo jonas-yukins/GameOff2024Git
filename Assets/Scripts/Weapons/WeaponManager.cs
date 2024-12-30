@@ -9,11 +9,18 @@ public class WeaponManager : MonoBehaviour
 
     public Transform cameraTransform;
     
+    [Header("Throwables")]
     public Throwable currentThrowable;
     private int currentThrowableIndex = 0; // Start with first throwable (grenade)
     public List<GameObject> throwablePrefabs = new List<GameObject>();  // List of lethal prefabs
 
-    
+    [Header("Tacticals")]
+    public Tactical currentTactical;
+    private int currentTacticalIndex = 0; // Start with first throwable (grenade)
+    public List<GameObject> tacticalPrefabs = new List<GameObject>();  // List of lethal prefabs
+
+
+    [Header("Weapons")]
     public Weapon currentWeapon;
     private int currentWeaponIndex = 0;  // Start with the first weapon (Pistol)
     public List<GameObject> weaponPrefabs = new List<GameObject>();  // List of weapon prefabs
@@ -33,12 +40,21 @@ public class WeaponManager : MonoBehaviour
         cameraTransform = Camera.main.transform;
 
         EquipWeapon(weaponPrefabs[currentWeaponIndex]);  // Default to the first weapon
+        EquipTactical(tacticalPrefabs[currentTacticalIndex]); // Default to the first tactical
         EquipThrowable(throwablePrefabs[currentThrowableIndex]);  // Default to the first throwable
     }
 
-    private void EquipThrowable(GameObject gameObject)
+    private void EquipTactical(GameObject newTactical)
     {
-        currentThrowable = gameObject.GetComponent<Throwable>();
+        currentTactical = newTactical.GetComponent<Tactical>();
+        currentTactical.tacticalPrefab = newTactical;
+        currentTactical.ammoCount = 2;
+    }
+
+    private void EquipThrowable(GameObject newThrowable)
+    {
+        currentThrowable = newThrowable.GetComponent<Throwable>();
+        currentThrowable.throwablePrefab = newThrowable;
         currentThrowable.ammoCount = 2;
     }
 
@@ -101,6 +117,8 @@ public class WeaponManager : MonoBehaviour
                 currentWeapon.totalAmmo += 18;
                 break;
         }
+
+        currentThrowable.ammoCount += 2;
     }
 
     public void handleADS()
@@ -115,7 +133,15 @@ public class WeaponManager : MonoBehaviour
     {
         if (currentThrowable != null)
         {
-            currentThrowable.ThrowLethal();
+            currentThrowable.Throw();
+        }
+    }
+
+    internal void handleTactical()
+    {
+        if (currentTactical != null)
+        {
+            currentTactical.applyTactical();
         }
     }
 }
