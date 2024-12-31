@@ -119,6 +119,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         currentThrowable.ammoCount += 2;
+        currentTactical.ammoCount += 2;
     }
 
     public void handleADS()

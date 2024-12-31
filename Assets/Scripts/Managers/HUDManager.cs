@@ -42,6 +42,7 @@ public class HUDManager : MonoBehaviour
     {
         Weapon activeWeapon = WeaponManager.Instance.currentWeapon;
         Throwable activeThrowable = WeaponManager.Instance.currentThrowable;
+        Tactical activeTactical = WeaponManager.Instance.currentTactical;
 
         if (activeWeapon)
         {
@@ -71,6 +72,29 @@ public class HUDManager : MonoBehaviour
         {
             lethalAmountUI.text = "";
             lethalUI.sprite = emptySlot;
+        }
+
+        if (activeTactical)
+        {
+            tacticalAmountUI.text = $"{activeTactical.ammoCount}";
+            Tactical.TacticalType tacticalType = activeTactical.tacticalType;
+            tacticalUI.sprite = GetTacticalSprite(tacticalType);
+        } else
+        {
+            lethalAmountUI.text = "";
+            lethalUI.sprite = emptySlot;
+        }
+    }
+
+    private Sprite GetTacticalSprite(Tactical.TacticalType tactical)
+    {
+        switch (tactical)
+        {
+            case Tactical.TacticalType.Pills:
+                return Resources.Load<GameObject>("HealthPack").GetComponent<SpriteRenderer>().sprite;
+            
+            default:
+                return null;
         }
     }
 

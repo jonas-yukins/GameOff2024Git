@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3333694664090169653}
   - component: {fileID: 6584438512652189944}
   - component: {fileID: 7718120502780827759}
+  - component: {fileID: -6115925600823617793}
   m_Layer: 0
   m_Name: PillBottle
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2165633040678745960}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.329, y: -0.065, z: 0.705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &3333694664090169653
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96,7 +97,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc79384b921a48998832cbb3b8c5efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7469886907494147618, guid: 67b3a121412b14dbc805b8ff72f6764e, type: 3}
-  ammoCount: 2
+  ammoCount: 1
   tacticalPrefab: {fileID: 2165633040678745960}
   tacticalType: 0
+--- !u!95 &-6115925600823617793
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2165633040678745960}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4df331bae01a04235a102fab818768a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

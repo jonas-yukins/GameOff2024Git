@@ -1,16 +1,12 @@
-using System;
+using System.Collections;
 using UnityEngine;
 
 public class Tactical : MonoBehaviour
 {
-    // Reference to the Player
-    public GameObject player;
-    private PlayerHealth playerHealth;
-
     public float ammoCount;
-
-    // Generic prefab that can be any tactical object
     public GameObject tacticalPrefab;
+
+    private GameObject currentTacticalObject;  // Store reference to the current tactical object
 
     public enum TacticalType
     {
@@ -20,56 +16,62 @@ public class Tactical : MonoBehaviour
 
     public TacticalType tacticalType;
 
-    private void Awake()
-    {
-        playerHealth = player.GetComponent<PlayerHealth>();
-    }
-
-    private void Update()
-    {
-        
-    }
-
     public void applyTactical()
     {
-        if (ammoCount < 1)
+        if (ammoCount <= 0)
         {
+            Debug.Log("No ammo left for tactical item!");
             return;
         }
 
-        // Get the camera's position and direction
+        ammoCount--;  // Decrease ammo count
+
+        if (Camera.main == null)
+        {
+            Debug.LogError("Main Camera not found.");
+            return;
+        }
+
         Vector3 cameraPosition = Camera.main.transform.position;
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight = Camera.main.transform.right;
         Vector3 cameraUp = Camera.main.transform.up;
 
-        // Define how far the throwable object should spawn in front of the camera and apply offsets
-        float spawnDistance = 1.0f; // How far in front of the camera the throwable will spawn
-        float leftOffset = -0.5f;  // Move a little to the left (negative)
-        float upOffset = 0.3f;     // Move a little up
+        float spawnDistance = 1.0f;
+        float leftOffset = -0.5f;
+        float upOffset = 0.3f;
 
-        // Calculate the spawn position
-        Vector3 spawnPosition = cameraPosition + cameraForward * spawnDistance   // In front of the camera
-                               + cameraRight * leftOffset                    // Slightly to the left
-                               + cameraUp * upOffset;                         // Slightly up
+        Vector3 spawnPosition = cameraPosition + cameraForward * spawnDistance
+                               + cameraRight * leftOffset
+                               + cameraUp * upOffset;
 
-        // Instantiate the generic throwable prefab at the calculated position
-        Instantiate(tacticalPrefab, spawnPosition, Quaternion.identity);
+        currentTacticalObject = Instantiate(tacticalPrefab, spawnPosition, Quaternion.identity);
+        currentTacticalObject.transform.SetParent(Camera.main.transform);
 
         switch (tacticalType)
         {
             case TacticalType.Pills:
-                PillsEffect();
+                PillsEffect(currentTacticalObject);
                 break;
-            // Add other throwable effects as needed
+            // Handle other tactical effects if needed
         }
-
-        //Destroy(gameObject);
     }
 
-    private void PillsEffect()
+    private void PillsEffect(GameObject spawnedTactical)
     {
         Debug.Log("PillsEffect");
-        //playerHealth.RestoreHealth(20);
+
+        // Play Sound
+        SoundManager.Instance.tacticalsChannel.PlayOneShot(SoundManager.Instance.pillBottleSound);
+
+        PlayerHealth.Instance.RestoreHealth(20);
+    }
+
+    private void DestroyTactical()
+    {
+        Debug.Log("Destroy Tactical");
+        // Optionally, you can add any cleanup here (effects, sounds, etc.)
+        Destroy(gameObject);  // Destroy the tactical object
+        
     }
 }

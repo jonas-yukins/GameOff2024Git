@@ -26,6 +26,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource throwablesChannel;
     public AudioClip grenadeSound;
 
+    // Tacticals
+    public AudioSource tacticalsChannel;
+    public AudioClip pillBottleSound;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
