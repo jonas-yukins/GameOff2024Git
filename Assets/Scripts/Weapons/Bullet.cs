@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -26,6 +27,11 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Hit Map");
             CreateBulletImpactEffect(objectHit);
+
+            if (WeaponManager.Instance.currentWeapon.currentShootingMode == Weapon.ShootingMode.Pellets)
+            {
+                ShotgunImpactEffect(objectHit);
+            }
         }
 
         if (hitTransform.CompareTag("Bottle"))
@@ -41,6 +47,21 @@ public class Bullet : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    void ShotgunImpactEffect(Collision objectHit)
+    {
+        // special effect for shotgun
+
+        ContactPoint contactPoint = objectHit.contacts[0];
+
+        GameObject effect = Instantiate(
+            GlobalReferences.Instance.shotgunImpactEffect,
+            contactPoint.point,
+            Quaternion.LookRotation(contactPoint.normal)
+        );
+
+        effect.transform.SetParent(objectHit.gameObject.transform);
     }
 
     void CreateBulletImpactEffect(Collision objectHit)

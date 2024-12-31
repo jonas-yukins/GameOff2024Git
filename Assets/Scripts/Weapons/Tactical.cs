@@ -52,6 +52,8 @@ public class Tactical : MonoBehaviour
         {
             case TacticalType.Pills:
                 PillsEffect(currentTacticalObject);
+                // Play Sound
+                SoundManager.Instance.tacticalsChannel.PlayOneShot(SoundManager.Instance.pillBottleSound);
                 break;
             // Handle other tactical effects if needed
         }
@@ -60,18 +62,20 @@ public class Tactical : MonoBehaviour
     private void PillsEffect(GameObject spawnedTactical)
     {
         Debug.Log("PillsEffect");
-
-        // Play Sound
-        SoundManager.Instance.tacticalsChannel.PlayOneShot(SoundManager.Instance.pillBottleSound);
-
-        PlayerHealth.Instance.RestoreHealth(20);
     }
 
     private void DestroyTactical()
     {
+        // Prompted by animation event
         Debug.Log("Destroy Tactical");
         // Optionally, you can add any cleanup here (effects, sounds, etc.)
         Destroy(gameObject);  // Destroy the tactical object
         
+    }
+
+    private void HealEffect(int input)
+    {
+        // Prompted by animation event
+        PlayerHealth.Instance.RestoreHealth(input);
     }
 }

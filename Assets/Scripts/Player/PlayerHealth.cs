@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public static PlayerHealth Instance { get; private set; }
 
     private float health;
-    private float lerpTimer; // animates healthBar
+    private float lerpTimer; // Animates healthBar
     [Header("Health Bar")]
     public float maxHealth = 100;
     public float chipSpeed = 2f;
@@ -17,12 +17,15 @@ public class PlayerHealth : MonoBehaviour
     public Image backHealthBar;
     public TMP_Text healthText;
 
-    [Header("Damage Overlay")]
-    public Image overlay; // DamageOverlay GameObject
-    public float duration; // how long image stays fully opaque
+    [Header("Screen Overlays")]
+    public Image damageOverlay;  // DamageOverlay Image
+    public Image healOverlay;    // HealOverlay Image
+    public float duration;       // How long image stays fully opaque
     public float fadeSpeed;
 
     private float durationTimer;
+    private bool isDamageOverlayActive = false;
+    private bool isHealOverlayActive = false;
 
     void Awake()
     {
@@ -34,12 +37,12 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             Instance = this;  // Set this instance as the singleton
-            // DontDestroyOnLoad(gameObject);  // Optionally persist across scenes
         }
 
         health = maxHealth;
         UpdateHealthText();
-        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+        damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 0); // Transparent by default
+        healOverlay.color = new Color(healOverlay.color.r, healOverlay.color.g, healOverlay.color.b, 0); // Transparent by default
     }
 
     void Update()
@@ -48,19 +51,29 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthUI();
         UpdateHealthText();
 
+        // Handle fading of overlays
+        if (isDamageOverlayActive)
+        {
+            FadeOverlay(damageOverlay);
+        }
+        else if (isHealOverlayActive)
+        {
+            FadeOverlay(healOverlay); 
+        }
+    }
+
+    // Function to fade the overlay based on alpha value
+    void FadeOverlay(Image overlay)
+    {
         if (overlay.color.a > 0)
         {
-            if (health < 30)
-            {
-                return; // Don't fade if health is below 30
-            }
             durationTimer += Time.deltaTime;
             if (durationTimer > duration)
             {
-                // Fade image
+                // Reduce alpha over time
                 float tempAlpha = overlay.color.a;
                 tempAlpha -= Time.deltaTime * fadeSpeed;
-                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
+                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, Mathf.Clamp(tempAlpha, 0, 1)); // Ensure alpha doesn't go below 0
             }
         }
     }
@@ -81,6 +94,9 @@ public class PlayerHealth : MonoBehaviour
             float percentComplete = lerpTimer / chipSpeed;
             percentComplete *= percentComplete; // square it to make animation smoother
             backHealthBar.fillAmount = Mathf.Lerp(fillBack, hFraction, percentComplete);
+
+            // Activate damage overlay
+            ShowDamageOverlay();
         }
 
         if (fillFront < hFraction)
@@ -92,6 +108,9 @@ public class PlayerHealth : MonoBehaviour
             float percentComplete = lerpTimer / chipSpeed;
             percentComplete *= percentComplete; // square it to make animation smoother
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, hFraction, percentComplete);
+
+            // Activate heal overlay
+            ShowHealOverlay();
         }
     }
 
@@ -100,13 +119,45 @@ public class PlayerHealth : MonoBehaviour
         health -= damage;
         lerpTimer = 0f;
         durationTimer = 0;
-        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+
+        // Hide heal overlay if active
+        healOverlay.color = new Color(healOverlay.color.r, healOverlay.color.g, healOverlay.color.b, 0);
+        isHealOverlayActive = false;
+
+        // Reset or reactivate damage overlay
+        ShowDamageOverlay();
     }
 
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
         lerpTimer = 0f;
+        durationTimer = 0;
+
+        // Hide damage overlay if active
+        damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 0);
+        isDamageOverlayActive = false;
+
+        // Activate heal overlay
+        ShowHealOverlay();
+    }
+
+    // Function to show damage overlay
+    void ShowDamageOverlay()
+    {
+        // Always reset the alpha to 1 to show the overlay again
+        damageOverlay.color = new Color(damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, 1);
+        isDamageOverlayActive = true;
+        durationTimer = 0; // Reset timer to start fading
+    }
+
+    // Function to show heal overlay
+    void ShowHealOverlay()
+    {
+        // Always reset the alpha to 1 to show the overlay again
+        healOverlay.color = new Color(healOverlay.color.r, healOverlay.color.g, healOverlay.color.b, 1);
+        isHealOverlayActive = true;
+        durationTimer = 0; // Reset timer to start fading
     }
 
     public void UpdateHealthText()
