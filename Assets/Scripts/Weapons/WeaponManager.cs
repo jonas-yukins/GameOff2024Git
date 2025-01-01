@@ -70,7 +70,15 @@ public class WeaponManager : MonoBehaviour
 
         // set ammoCount = magazineSize
         // plays animation
-        currentWeapon.Reload();
+        // Delay reload until the next frame to ensure everything is properly initialized
+        StartCoroutine(DelayedReload());
+}
+
+    private IEnumerator DelayedReload()
+    {
+        yield return null;  // Wait for the next frame
+
+        currentWeapon.Reload();  // Now reload
     }
 
     public void HandleFire(bool isFiring)

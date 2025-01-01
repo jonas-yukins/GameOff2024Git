@@ -10468,6 +10468,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2265049866038081936, guid: 67b3a121412b14dbc805b8ff72f6764e,
+        type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4703130809458270646, guid: 67b3a121412b14dbc805b8ff72f6764e,
         type: 3}
       propertyPath: promptText
