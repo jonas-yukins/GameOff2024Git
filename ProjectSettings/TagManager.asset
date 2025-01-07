@@ -8,6 +8,7 @@ TagManager:
   - Weapon
   - Map
   - Bottle
+  - Waypoints
   layers:
   - Default
   - TransparentFX

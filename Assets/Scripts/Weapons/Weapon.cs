@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
@@ -19,6 +20,7 @@ public abstract class Weapon : MonoBehaviour
     public int magazineSize;
     public int ammoCount;
     public int totalAmmo;
+    public int weaponDamage;
 
     [Header("Gun")]
     // Gun
@@ -195,6 +197,9 @@ public abstract class Weapon : MonoBehaviour
 
         // Instantiate the bullet at the gun barrel
         GameObject bullet = Instantiate(bulletPrefab, gunbarrel.position, gunbarrel.rotation);
+
+        Bullet bul = bullet.GetComponent<Bullet>();
+        bul.bulletDamage = weaponDamage;
 
         // Apply force to the bullet in the final direction
         bullet.GetComponent<Rigidbody>().AddForce(finalDirection * bulletVelocity, ForceMode.Impulse);

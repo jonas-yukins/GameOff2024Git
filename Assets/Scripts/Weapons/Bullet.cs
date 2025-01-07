@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int bulletDamage;
     private void OnCollisionEnter(Collision objectHit)
     {
         Transform hitTransform = objectHit.transform;
@@ -19,8 +20,7 @@ public class Bullet : MonoBehaviour
         if (hitTransform.CompareTag("Enemy"))
         {
             Debug.Log("Hit Enemy");
-            // decrease AI health
-            //hitTransform.GetComponent<PlayerHealth>().TakeDamage(10);
+            hitTransform.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
         
         if (hitTransform.CompareTag("Map"))

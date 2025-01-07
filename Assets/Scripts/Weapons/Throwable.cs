@@ -8,6 +8,7 @@ public class Throwable : MonoBehaviour
 
     public float ammoCount;
     public float throwForce = 10f;
+    public int damage = 100;
 
     // Generic prefab that can be any throwable object
     public GameObject throwablePrefab;
@@ -91,7 +92,10 @@ public class Throwable : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, damageRadius);
             }
 
-            // apply damage to enemy here
+            if (objectInRange.gameObject.GetComponent<Enemy>())
+            {
+                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            }
         }
     }
 

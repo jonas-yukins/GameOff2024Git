@@ -141,6 +141,7 @@ MonoBehaviour:
   magazineSize: 6
   ammoCount: 0
   totalAmmo: 18
+  weaponDamage: 10
   fireRate: 0.75
   reloadTime: 2
   bulletPerBurst: 3
