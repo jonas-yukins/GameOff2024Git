@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -16,16 +17,20 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthBar;
     public TMP_Text healthText;
+    public GameObject gameOverUI;
 
     [Header("Screen Overlays")]
-    public Image damageOverlay;  // DamageOverlay Image
-    public Image healOverlay;    // HealOverlay Image
+    public Image damageOverlay;  // bloody screen
+    public Image healOverlay;    // green screen
+    public Image deathOverlay; // death screen
     public float duration;       // How long image stays fully opaque
     public float fadeSpeed;
 
     private float durationTimer;
     private bool isDamageOverlayActive = false;
     private bool isHealOverlayActive = false;
+
+    public bool isDead;
 
     void Awake()
     {
@@ -94,9 +99,6 @@ public class PlayerHealth : MonoBehaviour
             float percentComplete = lerpTimer / chipSpeed;
             percentComplete *= percentComplete; // square it to make animation smoother
             backHealthBar.fillAmount = Mathf.Lerp(fillBack, hFraction, percentComplete);
-
-            // Activate damage overlay
-            ShowDamageOverlay();
         }
 
         if (fillFront < hFraction)
@@ -108,24 +110,85 @@ public class PlayerHealth : MonoBehaviour
             float percentComplete = lerpTimer / chipSpeed;
             percentComplete *= percentComplete; // square it to make animation smoother
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, hFraction, percentComplete);
-
-            // Activate heal overlay
-            ShowHealOverlay();
         }
     }
 
     public void TakeDamage(float damage)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         health -= damage;
+
+        // UI
         lerpTimer = 0f;
         durationTimer = 0;
-
         // Hide heal overlay if active
         healOverlay.color = new Color(healOverlay.color.r, healOverlay.color.g, healOverlay.color.b, 0);
         isHealOverlayActive = false;
-
         // Reset or reactivate damage overlay
         ShowDamageOverlay();
+
+        if (health <= 0)
+        {
+            Debug.Log("Player Dead");
+            PlayerDead();
+            isDead = true;
+
+            // gameover
+            // dying animation
+            // etc
+        }
+        else
+        {
+            Debug.Log("Player Hit");
+        }
+    }
+
+    private void PlayerDead()
+    {
+        GetComponent<InputManager>().enabled = false;
+
+        // Dying animation
+        GetComponentInChildren<Animator>().enabled = true;
+
+        StartCoroutine(FadeOut());
+        StartCoroutine(ShowGameOverUI());
+    }
+
+    private IEnumerator ShowGameOverUI()
+    {
+        yield return new WaitForSeconds(1f);
+        gameOverUI.gameObject.SetActive(true);
+    }
+
+    private IEnumerator FadeOut()
+    {
+        float timer = 0f;
+        float duration = 2f;
+        Color startColor = deathOverlay.color;
+        Color endColor = new Color(0f, 0f, 0f, 1f); // Black with alpha 1.
+ 
+        while (timer < duration)
+        {
+            // Interpolate the color between start and end over time.
+            deathOverlay.color = Color.Lerp(startColor, endColor, timer / duration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+ 
+        // Ensure the image is completely black at the end.
+        deathOverlay.color = endColor;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ZombieHand"))
+        {
+            TakeDamage(other.gameObject.GetComponent<ZombieHand>().damage);
+        }
     }
 
     public void RestoreHealth(float healAmount)

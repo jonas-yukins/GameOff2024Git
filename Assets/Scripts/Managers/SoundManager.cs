@@ -8,14 +8,18 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; set; }
 
+    // Audio Channels
+    public AudioSource WeaponChannel;
+    public AudioSource ItemChannel;
+    public AudioSource ZombieChannel;
+    public AudioSource ZombieChannel2; // for hurt sound
+
     // Shooting
-    public AudioSource ShootingChannel;
     public AudioClip P1911Shot;
     public AudioClip AK47Shot;
     public AudioClip ShotgunShot;
 
     // Reloading
-    public AudioSource ReloadingChannel;
     public AudioClip P1911Reload;
     public AudioClip AK47Reload;
     public AudioClip ShotgunReload;
@@ -23,12 +27,18 @@ public class SoundManager : MonoBehaviour
     public AudioClip AmmoBoxSound;
 
     // Throwables
-    public AudioSource throwablesChannel;
     public AudioClip grenadeSound;
 
     // Tacticals
-    public AudioSource tacticalsChannel;
     public AudioClip pillBottleSound;
+
+    // Zombie
+    public AudioClip zombieWalking;
+    public AudioClip zombieChase;
+    public AudioClip zombieAttack;
+    public AudioClip zombieHurt;
+    public AudioClip zombieDeath;
+
 
     private void Awake()
     {
@@ -48,15 +58,15 @@ public class SoundManager : MonoBehaviour
         {
             case Weapon.WeaponModel.Pistol:
                 // Pistol
-                ShootingChannel.PlayOneShot(P1911Shot);
+                WeaponChannel.PlayOneShot(P1911Shot);
                 break;
             case Weapon.WeaponModel.AssaultRifle:
                 // Assault Rifle
-                ShootingChannel.PlayOneShot(AK47Shot);
+                WeaponChannel.PlayOneShot(AK47Shot);
                 break;
             case Weapon.WeaponModel.Shotgun:
                 // Shotgun
-                ShootingChannel.PlayOneShot(ShotgunShot);
+                WeaponChannel.PlayOneShot(ShotgunShot);
                 break;
         }
     }
@@ -67,26 +77,26 @@ public class SoundManager : MonoBehaviour
         {
             case Weapon.WeaponModel.Pistol:
                 // Pistol
-                ReloadingChannel.PlayOneShot(P1911Reload);
+                WeaponChannel.PlayOneShot(P1911Reload);
                 break;
             case Weapon.WeaponModel.AssaultRifle:
                 // Assault Rifle
-                ReloadingChannel.PlayOneShot(AK47Reload);
+                WeaponChannel.PlayOneShot(AK47Reload);
                 break;
             case Weapon.WeaponModel.Shotgun:
                 // Shotgun
-                ReloadingChannel.PlayOneShot(ShotgunReload);
+                WeaponChannel.PlayOneShot(ShotgunReload);
                 break;
         }
     }
 
     public void PlayEmptyMagazineSound()
     {
-        ReloadingChannel.PlayOneShot(emptyMagazineSound);
+        WeaponChannel.PlayOneShot(emptyMagazineSound);
     }
 
     public void PlayAmmoBoxSound()
     {
-        ReloadingChannel.PlayOneShot(AmmoBoxSound);
+        ItemChannel.PlayOneShot(AmmoBoxSound);
     }
 }

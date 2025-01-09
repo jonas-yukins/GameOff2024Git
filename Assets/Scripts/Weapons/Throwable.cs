@@ -80,7 +80,7 @@ public class Throwable : MonoBehaviour
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
         // Play Sound
-        SoundManager.Instance.throwablesChannel.PlayOneShot(SoundManager.Instance.grenadeSound);
+        SoundManager.Instance.ItemChannel.PlayOneShot(SoundManager.Instance.grenadeSound);
 
         // Physical Effect
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);

@@ -9,6 +9,7 @@ TagManager:
   - Map
   - Bottle
   - Waypoints
+  - ZombieHand
   layers:
   - Default
   - TransparentFX

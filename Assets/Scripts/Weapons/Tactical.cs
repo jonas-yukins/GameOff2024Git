@@ -53,7 +53,7 @@ public class Tactical : MonoBehaviour
             case TacticalType.Pills:
                 PillsEffect(currentTacticalObject);
                 // Play Sound
-                SoundManager.Instance.tacticalsChannel.PlayOneShot(SoundManager.Instance.pillBottleSound);
+                SoundManager.Instance.ItemChannel.PlayOneShot(SoundManager.Instance.pillBottleSound);
                 break;
             // Handle other tactical effects if needed
         }

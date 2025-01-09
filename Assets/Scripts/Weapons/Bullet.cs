@@ -20,7 +20,13 @@ public class Bullet : MonoBehaviour
         if (hitTransform.CompareTag("Enemy"))
         {
             Debug.Log("Hit Enemy");
-            hitTransform.GetComponent<Enemy>().TakeDamage(bulletDamage);
+
+            if (hitTransform.gameObject.GetComponent<Enemy>().isDead == false)
+            {
+                hitTransform.GetComponent<Enemy>().TakeDamage(bulletDamage);
+            }
+
+            CreateBloodSprayEffect(objectHit);
         }
         
         if (hitTransform.CompareTag("Map"))
@@ -49,31 +55,44 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void CreateBloodSprayEffect(Collision objectHit)
+    {
+        ContactPoint contactPoint = objectHit.contacts[0];
+
+        GameObject bloodSprayPrefab = Instantiate(
+            GlobalReferences.Instance.bloodSprayEffect,
+            contactPoint.point,
+            Quaternion.LookRotation(contactPoint.normal)
+        );
+
+        bloodSprayPrefab.transform.SetParent(objectHit.gameObject.transform);
+    }
+
     void ShotgunImpactEffect(Collision objectHit)
     {
         // special effect for shotgun
 
         ContactPoint contactPoint = objectHit.contacts[0];
 
-        GameObject effect = Instantiate(
+        GameObject shotgunImpactPrefab = Instantiate(
             GlobalReferences.Instance.shotgunImpactEffect,
             contactPoint.point,
             Quaternion.LookRotation(contactPoint.normal)
         );
 
-        effect.transform.SetParent(objectHit.gameObject.transform);
+        shotgunImpactPrefab.transform.SetParent(objectHit.gameObject.transform);
     }
 
     void CreateBulletImpactEffect(Collision objectHit)
     {
         ContactPoint contactPoint = objectHit.contacts[0];
 
-        GameObject hole = Instantiate(
+        GameObject bulletHolePrefab = Instantiate(
             GlobalReferences.Instance.bulletImpactEffectPrefab,
             contactPoint.point,
             Quaternion.LookRotation(contactPoint.normal)
         );
 
-        hole.transform.SetParent(objectHit.gameObject.transform);
+        bulletHolePrefab.transform.SetParent(objectHit.gameObject.transform);
     }
 }
