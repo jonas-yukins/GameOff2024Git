@@ -9,35 +9,55 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; set; }
 
     // Audio Channels
+    [Header("Audio Channels")]
     public AudioSource WeaponChannel;
     public AudioSource ItemChannel;
     public AudioSource ZombieChannel;
     public AudioSource ZombieChannel2; // for hurt sound
+    public AudioSource PlayerChannel;
+    public AudioSource MusicChannel;
 
     // Shooting
+    [Header("Shooting Sounds")]
     public AudioClip P1911Shot;
     public AudioClip AK47Shot;
     public AudioClip ShotgunShot;
 
     // Reloading
+    [Header("Reloading Sounds")]
     public AudioClip P1911Reload;
     public AudioClip AK47Reload;
     public AudioClip ShotgunReload;
     public AudioClip emptyMagazineSound;
-    public AudioClip AmmoBoxSound;
 
+    // Interactables
+    [Header("Interactable Sounds")]
+    public AudioClip AmmoBoxSound;
+    
     // Throwables
+    [Header("Throwable Sounds")]
     public AudioClip grenadeSound;
 
     // Tacticals
+    [Header("Tactical Sounds")]
     public AudioClip pillBottleSound;
 
     // Zombie
+    [Header("Zombie Sounds")]
     public AudioClip zombieWalking;
     public AudioClip zombieChase;
     public AudioClip zombieAttack;
     public AudioClip zombieHurt;
     public AudioClip zombieDeath;
+
+    // Player
+    [Header("Player Sounds")]
+    public AudioClip playerHurt;
+    public AudioClip playerDeath;
+
+    // Music
+    [Header("Music")]
+    public AudioClip gameOverMusic;
 
 
     private void Awake()

@@ -144,11 +144,16 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             Debug.Log("Player Hit");
+            SoundManager.Instance.PlayerChannel.PlayOneShot(SoundManager.Instance.playerHurt);
         }
     }
 
     private void PlayerDead()
     {
+        SoundManager.Instance.PlayerChannel.PlayOneShot(SoundManager.Instance.playerDeath);
+        SoundManager.Instance.MusicChannel.clip = SoundManager.Instance.gameOverMusic;
+        SoundManager.Instance.MusicChannel.PlayDelayed(1f);
+        
         GetComponent<InputManager>().enabled = false;
 
         // Dying animation

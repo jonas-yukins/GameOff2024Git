@@ -94,7 +94,10 @@ public class Throwable : MonoBehaviour
 
             if (objectInRange.gameObject.GetComponent<Enemy>())
             {
-                objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+                if (objectInRange.gameObject.GetComponent<Enemy>().isDead == false)
+                {
+                    objectInRange.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+                }
             }
         }
     }
