@@ -58,6 +58,7 @@ public class SoundManager : MonoBehaviour
     // Music
     [Header("Music")]
     public AudioClip gameOverMusic;
+    public AudioClip mainMenuMusic;
 
 
     private void Awake()
@@ -70,6 +71,8 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        DontDestroyOnLoad(this);
     }
 
     public void PlayShootingSound(Weapon.WeaponModel weapon)

@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieHand: {fileID: 4403790992261629862}
-  zombieDamage: 25
+  zombieDamage: 15
 --- !u!1 &172106556318891392
 GameObject:
   m_ObjectHideFlags: 0
