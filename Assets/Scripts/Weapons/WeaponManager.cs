@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -16,15 +17,21 @@ public class WeaponManager : MonoBehaviour
 
     [Header("Tacticals")]
     public Tactical currentTactical;
-    private int currentTacticalIndex = 0; // Start with first throwable (grenade)
-    public List<GameObject> tacticalPrefabs = new List<GameObject>();  // List of lethal prefabs
-
+    private int currentTacticalIndex = 0; // Start with first tactical (grenade)
+    public List<GameObject> tacticalPrefabs = new List<GameObject>();  // List of tactical prefabs
 
     [Header("Weapons")]
     public Weapon currentWeapon;
     private int currentWeaponIndex = 0;  // Start with the first weapon (Pistol)
     public List<GameObject> weaponPrefabs = new List<GameObject>();  // List of weapon prefabs
 
+    [Header("IK Hand Targets")]
+    private Animator animator;
+    // Reference to the TwoBoneIKConstraint components
+    public TwoBoneIKConstraint rightHandIKConstraint;
+    public TwoBoneIKConstraint leftHandIKConstraint;
+    
+    
     void Awake()
     {
         // Ensure only one instance of WeaponManager exists
@@ -38,6 +45,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         cameraTransform = Camera.main.transform;
+        animator = GetComponent<Animator>();
 
         EquipWeapon(weaponPrefabs[currentWeaponIndex]);  // Default to the first weapon
         EquipTactical(tacticalPrefabs[currentTacticalIndex]); // Default to the first tactical
@@ -62,17 +70,27 @@ public class WeaponManager : MonoBehaviour
     {
         if (currentWeapon != null)
         {
-            Destroy(currentWeapon.gameObject);  // Destroy current weapon if exists
+            Destroy(currentWeapon.gameObject);  // Destroy the previous weapon if exists
         }
 
+        // Instantiate the new weapon
         GameObject weaponObject = Instantiate(newWeaponPrefab, cameraTransform);
         currentWeapon = weaponObject.GetComponent<Weapon>();  // Get the Weapon component
 
-        // set ammoCount = magazineSize
-        // plays animation
-        // Delay reload until the next frame to ensure everything is properly initialized
+        // Update IK targets
+        UpdateIKTargets();
+
+        // Optional: Delay reload to make sure everything initializes properly
         StartCoroutine(DelayedReload());
-}
+    }
+
+
+    private void UpdateIKTargets()
+    {
+        // Now assign the weapon's grip points to the IK targets
+        rightHandIKConstraint.data.target = currentWeapon.ref_right_hand_grip;
+        leftHandIKConstraint.data.target = currentWeapon.ref_left_hand_grip;
+    }
 
     private IEnumerator DelayedReload()
     {
@@ -154,4 +172,3 @@ public class WeaponManager : MonoBehaviour
         }
     }
 }
-

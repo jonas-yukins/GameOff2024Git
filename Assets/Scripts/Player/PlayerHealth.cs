@@ -159,8 +159,8 @@ public class PlayerHealth : MonoBehaviour
         GetComponent<InputManager>().enabled = false;
 
         // Dying animation
-        GetComponentInChildren<Animator>().enabled = true;
-
+        GetComponentInChildren<Camera>().GetComponent<Animator>().enabled = true;
+        
         StartCoroutine(FadeOut());
         StartCoroutine(ShowGameOverUI());
     }

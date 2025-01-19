@@ -11,6 +11,9 @@ public abstract class Weapon : MonoBehaviour
     [Header("Object References")]
     // Object references
     public Transform gunbarrel;
+    public Transform ref_left_hand_grip; // The position where the left hand should grip the weapon
+    public Transform ref_right_hand_grip; // The position where the right hand should grip the weapon
+
 
     [Header("Bullet")]
     // Bullet

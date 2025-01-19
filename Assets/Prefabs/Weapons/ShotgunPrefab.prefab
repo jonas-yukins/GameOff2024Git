@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunbarrel: {fileID: 5445392997888418405}
+  leftHandIKTarget: {fileID: 0}
+  rightHandIKTarget: {fileID: 0}
   bulletPrefab: {fileID: 1415396412359846111, guid: c1ecfbc6c3a33453780c76c553185270,
     type: 3}
   bulletVelocity: 500
@@ -150,7 +152,7 @@ MonoBehaviour:
   hipSpreadIntensity: 0.2
   adsSpreadIntensity: 0.08
   muzzleEffect: {fileID: 8232236579699432661}
-  animator: {fileID: 0}
+  animator: {fileID: 6630784489351399196}
   thisWeaponModel: 2
   currentShootingMode: 2
 --- !u!114 &-6770246810997333279
