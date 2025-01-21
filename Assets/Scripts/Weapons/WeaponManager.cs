@@ -26,10 +26,11 @@ public class WeaponManager : MonoBehaviour
     public List<GameObject> weaponPrefabs = new List<GameObject>();  // List of weapon prefabs
 
     [Header("IK Hand Targets")]
-    private Animator animator;
+    public Animator armAnimator;
     // Reference to the TwoBoneIKConstraint components
     public TwoBoneIKConstraint rightHandIKConstraint;
     public TwoBoneIKConstraint leftHandIKConstraint;
+    public RigBuilder rigBuilder;
     
     
     void Awake()
@@ -45,7 +46,6 @@ public class WeaponManager : MonoBehaviour
         }
 
         cameraTransform = Camera.main.transform;
-        animator = GetComponent<Animator>();
 
         EquipWeapon(weaponPrefabs[currentWeaponIndex]);  // Default to the first weapon
         EquipTactical(tacticalPrefabs[currentTacticalIndex]); // Default to the first tactical
@@ -90,6 +90,9 @@ public class WeaponManager : MonoBehaviour
         // Now assign the weapon's grip points to the IK targets
         rightHandIKConstraint.data.target = currentWeapon.ref_right_hand_grip;
         leftHandIKConstraint.data.target = currentWeapon.ref_left_hand_grip;
+
+        // Update Rig
+        rigBuilder.Build();
     }
 
     private IEnumerator DelayedReload()

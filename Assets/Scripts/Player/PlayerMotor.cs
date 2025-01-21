@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
-    private Animator animator;
+    //private Animator animator; 
+    // commented out animations for player capsule
     private Vector3 playerVelocity;
     private bool isGrounded;
     public float speed = 5f;
@@ -17,14 +18,14 @@ public class PlayerMotor : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update() {
         isGrounded = controller.isGrounded;
         // Update the IsGrounded parameter in the Animator
-        animator.SetBool("isGrounded", isGrounded);
+        //animator.SetBool("isGrounded", isGrounded);
     }
     
     //receive the inputs for our InputManager.cs and apply them to our character controller.
@@ -49,12 +50,12 @@ public class PlayerMotor : MonoBehaviour
 
         // Calculate the movement speed and update the Animator
         float movementSpeed = new Vector2(input.x, input.y).magnitude;
-        animator.SetFloat("Speed", movementSpeed);  // Update the Speed parameter
+        //animator.SetFloat("Speed", movementSpeed);  // Update the Speed parameter
 
         // If the player is on the ground, make sure jump animation transitions out
-        if (isGrounded && playerVelocity.y <= 0f) {
-            animator.ResetTrigger("Jump");
-        }
+        //if (isGrounded && playerVelocity.y <= 0f) {
+        //    animator.ResetTrigger("Jump");
+        //}
     }
 
     public void Jump() {
@@ -62,7 +63,7 @@ public class PlayerMotor : MonoBehaviour
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
 
             // Trigger jump animation
-            animator.SetTrigger("Jump");
+            //animator.SetTrigger("Jump");
         }
     }
 }
