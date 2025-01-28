@@ -12465,6 +12465,64 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1235364291}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &288068244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288068245}
+  - component: {fileID: 288068246}
+  m_Layer: 0
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288068245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288068244}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5902313737411676808}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &288068246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288068244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5c1156cf2284b7aa947e92fcb69f99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: 0.01
+  maxStepDistance: 0.06
+  rotationStep: 4
+  maxRotationStep: 5
+  smooth: 10
+  speedCurve: 0
+  travelLimit: {x: 0.1, y: 0.01, z: 0.1}
+  bobLimit: {x: 0.01, y: 0.01, z: 0.01}
+  bobExaggeration: 1
+  multiplier: {x: 2, y: 2, z: 2}
+  adsSwayMultiplier: 0.2
+  isADS: 0
+  walkInput: {x: 0, y: 0}
+  lookInput: {x: 0, y: 0}
 --- !u!4 &288179205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4517740199119114, guid: 0fd5be61d8c00de419d45d6bf745a69c,
@@ -89478,7 +89536,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300006, guid: dacb33b4a6c2e3e4486be79c593a23e4, type: 3}
   m_Bones:
@@ -91435,6 +91493,7 @@ Transform:
   m_Children:
   - {fileID: 4134983247500384255}
   - {fileID: 6945560169018745646}
+  - {fileID: 288068245}
   m_Father: {fileID: 3853971456445806735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &6513720671884448640
@@ -91664,6 +91723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 5902313737411676808}
+  weaponHolder: {fileID: 288068245}
   currentThrowable: {fileID: 0}
   throwablePrefabs:
   - {fileID: 1422160608264769124, guid: e6e04b7fa54ee4b27926b887c8d9a947, type: 3}
@@ -91744,6 +91804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce04bd022493b41e7a981bd66afd7f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrounded: 0
   speed: 5
   gravity: -20
   jumpHeight: 1
@@ -91874,7 +91935,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 0

@@ -9,6 +9,7 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager Instance { get; private set; }  // Singleton Instance
 
     public Transform cameraTransform;
+    public Transform weaponHolder;
     
     [Header("Throwables")]
     public Throwable currentThrowable;
@@ -31,8 +32,7 @@ public class WeaponManager : MonoBehaviour
     public TwoBoneIKConstraint rightHandIKConstraint;
     public TwoBoneIKConstraint leftHandIKConstraint;
     public RigBuilder rigBuilder;
-    
-    
+
     void Awake()
     {
         // Ensure only one instance of WeaponManager exists
@@ -74,7 +74,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         // Instantiate the new weapon
-        GameObject weaponObject = Instantiate(newWeaponPrefab, cameraTransform);
+        GameObject weaponObject = Instantiate(newWeaponPrefab, weaponHolder);
         currentWeapon = weaponObject.GetComponent<Weapon>();  // Get the Weapon component
 
         // Update IK targets
@@ -128,6 +128,7 @@ public class WeaponManager : MonoBehaviour
         if (weaponIndex >= 0 && weaponIndex < weaponPrefabs.Count)
         {
             EquipWeapon(weaponPrefabs[weaponIndex]);
+            currentWeapon.isADS = false;
             Debug.Log($"Switched to {weaponPrefabs[weaponIndex].name}");
         }
     }

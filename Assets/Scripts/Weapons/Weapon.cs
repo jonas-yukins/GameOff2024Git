@@ -34,7 +34,7 @@ public abstract class Weapon : MonoBehaviour
     // Current actions
     private bool isFiring = false;
     private bool isReloading = false;
-    private bool isADS = false;
+    public bool isADS = false;
 
     [Header("Burst")]
     // Burst
@@ -278,6 +278,7 @@ public abstract class Weapon : MonoBehaviour
             toggleADS();
         }
         isReloading = true;
+        HUDManager.Instance.middleDot.SetActive(true);
 
         animator.SetTrigger("RELOAD");
         SoundManager.Instance.PlayReloadSound(thisWeaponModel);

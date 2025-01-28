@@ -8,7 +8,7 @@ public class PlayerMotor : MonoBehaviour
     //private Animator animator; 
     // commented out animations for player capsule
     private Vector3 playerVelocity;
-    private bool isGrounded;
+    public bool isGrounded;
     public float speed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 1f;
