@@ -31,7 +31,7 @@ public class ZombieChaseState : StateMachineBehaviour
         }
 
         agent.SetDestination(player.position);
-        animator.transform.LookAt(player);
+        LookAtPlayer();
 
         float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
 
@@ -56,5 +56,14 @@ public class ZombieChaseState : StateMachineBehaviour
         agent.SetDestination(agent.transform.position);
 
         SoundManager.Instance.ZombieChannel.Stop();
+    }
+
+    private void LookAtPlayer()
+    {
+        Vector3 direction = player.position - agent.transform.position;
+        agent.transform.rotation = Quaternion.LookRotation(direction);
+
+        var yRotation = agent.transform.eulerAngles.y;
+        agent.transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 }

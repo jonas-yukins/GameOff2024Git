@@ -46,6 +46,17 @@ public class ZombieSpawnController : MonoBehaviour
         StartCoroutine(SpawnWave());
     }
 
+    private void DestroyAllEnemies()
+    {
+        // Find all GameObjects with the "enemy" tag and destroy them
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject zombie in enemies)
+        {
+            Destroy(zombie); // Destroy the GameObject (the zombie body)
+        }    
+    }
+
     private IEnumerator SpawnWave()
     {
         for (int i = 0; i < currentZombiesPerWave; i++)
@@ -114,6 +125,8 @@ public class ZombieSpawnController : MonoBehaviour
         waveOverUI.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(waveCooldown);
+
+        DestroyAllEnemies();
 
         inCooldown = false;
         waveOverUI.gameObject.SetActive(false);

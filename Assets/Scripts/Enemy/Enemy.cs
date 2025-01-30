@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,15 +7,18 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int HP = 100;
     private Animator animator;
-
     private NavMeshAgent navAgent;
-
+    
     public bool isDead;
+
+    // Reference to the enemy Collider
+    private Collider enemyCollider;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
+        enemyCollider = GetComponent<Collider>(); // Get the collider at start
     }
 
     public void TakeDamage(int damageAmount)
@@ -34,12 +36,16 @@ public class Enemy : MonoBehaviour
             else
             {
                 animator.SetTrigger("DIE2");
-            }   
+            }
             isDead = true;
 
+            // Disable the collider when the enemy is dead
+            if (enemyCollider != null)
+            {
+                enemyCollider.enabled = false;
+            }
+
             // Death sound
-            // right now it's specific to zombie, 
-            // but later make this generic when more enemies added
             SoundManager.Instance.ZombieChannel.PlayOneShot(SoundManager.Instance.zombieDeath);     
         }
         else
@@ -47,7 +53,6 @@ public class Enemy : MonoBehaviour
             animator.SetTrigger("DAMAGE");
 
             // Hurt sound
-            // also make generic later
             SoundManager.Instance.ZombieChannel2.PlayOneShot(SoundManager.Instance.zombieHurt);
         }
     }
@@ -62,6 +67,5 @@ public class Enemy : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, 101f); // Stop chasing
-
     }
 }
