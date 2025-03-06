@@ -6,10 +6,6 @@ Welcome to **Zombie Mayhem**, a thrilling action-packed game where players fight
 
 - [Game Overview](#game-overview)
 - [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Controls](#controls)
-- [Contributing](#contributing)
 
 ## Game Overview
 
